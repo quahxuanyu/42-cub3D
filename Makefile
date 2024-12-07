@@ -35,11 +35,11 @@ $(LIBFT):
 	make -C $(LIBFT_PATH) all
 
 clean:
-	make -C $(LIBFT_PATH) clean
+	make -C $(LIBFT_PATH) fclean
+	make clean -C $(MINILIBX) 
 	rm -rf $(OBJDIR)
 
 fclean: clean
-	make -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
 
 re: fclean all
