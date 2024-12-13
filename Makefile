@@ -1,7 +1,8 @@
 # Directories
 SRCDIR = src/
 OBJDIR = objs/
-SRC_FILES = main.c
+SRC_FILES = main.c \
+			player.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
