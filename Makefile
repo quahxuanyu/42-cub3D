@@ -45,4 +45,7 @@ fclean: clean
 
 re: fclean all
 
+valgrind :
+	valgrind --leak-check=full ./cub3D
+
 .PHONY: all clean fclean re libft
