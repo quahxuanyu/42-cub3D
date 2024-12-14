@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/13 17:59:08 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/14 18:46:47 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../minilibx-linux/mlx.h"
 #include <math.h>
 #include <stdio.h> 
+#include <stdlib.h>
 #include <stdbool.h>
 #define mapWidth 18
 #define mapHeight 10
@@ -68,4 +69,7 @@ int		key_press(int keycode, t_player *player);
 int		key_release(int keycode, t_player *player);
 void	move_player(t_game *game, t_player *player);
 bool	touch(t_game *game, float px, float py);
+
+/* Parsing */
+int	check_input (int ac, char **av);
 #endif
