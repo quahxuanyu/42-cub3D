@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
 /*   Updated: 2024/12/16 18:23:30 by xquah            ###   ########.fr       */
@@ -72,4 +72,7 @@ int		key_press(int keycode, t_player *player);
 int		key_release(int keycode, t_player *player);
 void	move_player(t_game *game, t_player *player);
 bool	touch(t_game *game, float px, float py);
+
+/* Parsing */
+int	check_input (int ac, char **av);
 #endif
