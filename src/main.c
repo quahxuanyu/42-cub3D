@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/16 18:22:42 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:40:19 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,12 @@ void	draw_ray(t_game *game, float angle_diff, int x)
 	float ray_y;
 	float cos_angle;
 	float sin_angle;
-	
 
+	// DDA Line Algorithm
 	ray_x = game->player.x; // Reset ray_x
 	ray_y = game->player.y; // Reset ray_y
 	cos_angle = cos(game->player.angle + angle_diff); // they are all below 1
 	sin_angle = sin(game->player.angle + angle_diff);
-	//DDA Line Algorithm
 	while (!touch(game, ray_x, ray_y))
 	{
 		if (VIEW_STATE == 2)
@@ -179,7 +178,7 @@ void	raycast(t_game *game)
 	float ray_y;
 	float cos_angle;
 	float sin_angle;
-	float FOV = PI / 2;
+	float FOV = PI / 3;
 	float fraction = FOV / screenWidth;
 	float angle_diff = (FOV / 2) * -1;	
 	int i = -1;

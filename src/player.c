@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/16 16:37:54 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:40:38 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_player(t_player *player)
 
 int key_press(int keycode, t_player *player)
 {
-	printf("keycode: %d\n", keycode);
+	// printf("keycode: %d\n", keycode);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
