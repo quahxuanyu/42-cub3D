@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/14 18:46:47 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/16 18:23:30 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 #include <stdbool.h>
 #define mapWidth 18
 #define mapHeight 10
-#define screenWidth 1280
+// RATIO: 4:3
+// NOTE: any size of screen and wall size works, as long as player does not spawn outsied the walls (it wil seg fault)
+#define screenWidth 1280 
 #define screenHeight 960
-#define WALL_SIZE 64
+#define WALL_SIZE 63
+#define VIEW_STATE 3 //2 for 2D, 3 for 3D
 
 # define W 119
 # define A 97

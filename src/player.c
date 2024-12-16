@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/13 17:58:40 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/16 16:37:54 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	move_player(t_game *game, t_player *player)
 	if (player->angle < 0)
 		player->angle = 2 * PI;
 	
-	printf("angle: %f\n", player->angle);
+	// printf("angle: %f\n", player->angle);
 	if (player->key_up && !touch(game, player->x + cos_angle * PLAYER_SPEED, player->y + sin_angle * PLAYER_SPEED))
 	{
 		player->x += cos_angle * PLAYER_SPEED;
