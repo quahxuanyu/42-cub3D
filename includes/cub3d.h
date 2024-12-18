@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/16 18:23:30 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/18 21:17:31 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <fcntl.h>
 #define mapWidth 18
 #define mapHeight 10
 // RATIO: 4:3
@@ -75,4 +77,6 @@ bool	touch(t_game *game, float px, float py);
 
 /* Parsing */
 int	check_input (int ac, char **av);
+static int count_lines(const char *filename);
+char **read_map_from_file(const char *filename);
 #endif

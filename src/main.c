@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/16 18:40:19 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/18 21:22:54 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,25 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 		my_mlx_pixel_put(game, x + size, y + i, color);
 }
 
-char **get_map(void)
-{
-	char **map;
-	map = malloc(sizeof(char *) * 11); // Allocate space for 11 rows + 1 for NULL termination
-	map[0] = "111111111111111111";
-	map[1] = "100000000000100001";
-	map[2] = "100010000000000001";
-	map[3] = "100000000000000001";
-	map[4] = "100010000010000001";
-	map[5] = "100000000000000001";
-	map[6] = "100000000000000001";
-	map[7] = "101000000000000001";
-	map[8] = "100000000000000001";
-	map[9] = "111111111111111111";
-	map[10] = NULL; // Null terminate the map
-	return map;
-}
+// char **get_map(void)
+// {
+// 	char **map;
+// 	map = malloc(sizeof(char *) * 11); // Allocate space for 11 rows + 1 for NULL termination
+// 	map[0] = "111111111111111111";
+// 	map[1] = "100000000000100001";
+// 	map[2] = "100010000000000001";
+// 	map[3] = "100000000000000001";
+// 	map[4] = "100010000010000001";
+// 	map[5] = "100000000000000001";
+// 	map[6] = "100000000000000001";
+// 	map[7] = "101000000000000001";
+// 	map[8] = "100000000000000001";
+// 	map[9] = "111111111111111111";
+// 	map[10] = NULL; // Null terminate the map
+// 	return map;
+// }
 
-void init_game(t_game * game)
+void init_game(t_game * game, const char *map_file)
 {
 	init_player(&game->player);
 	game->mlx = mlx_init();
@@ -66,7 +66,7 @@ void init_game(t_game * game)
 	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
 	game->data = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->line_length,
 									&game->endian);
-	game->map = get_map();
+	game->map = read_map_from_file(map_file);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
@@ -205,11 +205,13 @@ int draw_loop(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-int main(void)
+int main(int ac, char **av)
 {
+	if (check_input(ac, av))
+		return (1);
+		
 	t_game game;
-
-	init_game(&game);
+	init_game(&game,av[1]);
 
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
