@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/14 18:46:47 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/18 18:43:19 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <fcntl.h>
 #define mapWidth 18
 #define mapHeight 10
 #define screenWidth 1280
@@ -33,6 +34,9 @@
 # define PLAYER_SPEED 2
 
 #define PI 3.14159265359
+
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 typedef struct s_player
 {
@@ -72,4 +76,8 @@ bool	touch(t_game *game, float px, float py);
 
 /* Parsing */
 int	check_input (int ac, char **av);
+char **read_map_from_file(const char *filename);
+int process_map_line(char **map, char *line, int line_count);
+int is_line_empty(const char *line);
+char **allocate_map_memory(int max_lines);
 #endif

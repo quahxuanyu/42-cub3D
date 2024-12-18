@@ -6,6 +6,7 @@ NAME = $(CUB3D)
 # Directories
 SRCDIR = src/
 OBJDIR = objs/
+MAPDIR = maps/
 
 # Parsing directory
 PARDIR = $(SRCDIR)parsing/
@@ -13,7 +14,8 @@ PARDIR = $(SRCDIR)parsing/
 # Source files
 SRC_FILES = main.c \
             player.c \
-            $(PARDIR)checking.c
+            $(PARDIR)checking.c \
+			$(PARDIR)parser.c \
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
@@ -32,7 +34,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # Include directories
-INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PARDIR)
+INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PARDIR) -I $(MAPDIR)
 
 # Linker flags
 LDFLAGS = -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft -lm -lbsd -lX11 -lXext
