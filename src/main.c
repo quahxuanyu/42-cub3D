@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/18 18:38:06 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/18 19:13:09 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 // 	return map;
 // }
 
-void init_game(t_game * game)
+void init_game(t_game * game, const char *map_file)
 {
 	init_player(&game->player);
 	game->mlx = mlx_init();
@@ -66,7 +66,12 @@ void init_game(t_game * game)
 	game->img = mlx_new_image(game->mlx, screenWidth, screenHeight);
 	game->data = mlx_get_data_addr(game->img, &game->bits_per_pixel, &game->line_length,
 									&game->endian);
-	game->map = read_map_from_file("maps/test.cub");
+	game->map = read_map_from_file(map_file);
+	if (!game->map) 
+	{
+        printf("Error\nFailed to initialize map\n");
+        exit(EXIT_FAILURE); // debug
+    }
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
@@ -181,7 +186,7 @@ int main(int ac, char **av)
 	
 	t_game game;
 
-	init_game(&game);
+	init_game(&game, av[1]);
 
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);

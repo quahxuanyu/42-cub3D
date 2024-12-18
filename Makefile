@@ -1,3 +1,8 @@
+# Define color codes
+ORANGE = \033[38;5;214m
+GREEN = \033[32m
+YELLOW = \033[33m
+RESET = \033[0m
 
 # Program file name
 CUB3D = cub3D
@@ -44,7 +49,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
-	@echo -e "\n\n\n\033[38;5;214m -- Done compiling cub3d, let game begin now ! --\033[0m"
+	 @echo -e "\n\n\n$(YELLOW) -- DONE COMPILING CUB3D, LET'S BEGIN THE GAME NOW ! --$(RESET)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)

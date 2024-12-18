@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 18:17:01 by hheng             #+#    #+#             */
-/*   Updated: 2024/12/18 18:42:56 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/18 19:21:33 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,38 @@ char **allocate_map_memory(int max_lines)
 
 int is_line_empty(const char *line)
 {
-    while (*line) {
-        if (!ft_isspace((int)*line)) // Cast `char` to `int`
+    if (!line)
+	{
+        printf("Error\nNull pointer passed to is_line_empty\n");
+        return 1; // Treat as empty line
+    }
+
+    while (*line)
+	{
+        if (!ft_isspace((unsigned char)*line)) // Cast to `unsigned char`
             return 0; // Line contains non-whitespace characters
         line++;
     }
     return 1; // Line is empty or contains only whitespace
 }
 
-int process_map_line(char **map, char *line, int line_count)
-{
-    if (is_line_empty(line)) {
-        free(line); // Free blank or whitespace-only lines
-        return line_count; // Do not increment line_count
+int process_map_line(char **map, char *line, int line_count) {
+    if (!line) {
+        printf("Error\nNull line passed to process_map_line\n");
+        return line_count; // Ignore and continue
     }
-    map[line_count] = line; // Add valid line to the map
-    return line_count + 1; // Increment line count
+
+    printf("Debug: Processing line: %s\n", line); // Debug log
+
+    if (is_line_empty(line)) {
+        free(line);
+        return line_count;
+    }
+
+    map[line_count] = line;
+    return line_count + 1;
 }
+
 
 char **read_map_from_file(const char *filename)
 {
@@ -66,15 +81,20 @@ char **read_map_from_file(const char *filename)
 	}
 	
 	line_count = 0;
-	while((line = get_next_line(fd)) != NULL)
-	{
-        line_count = process_map_line(map, line, line_count);
-        if (line_count >= max_line)
-		{
-			printf("Error\nMap is too large\n");
-			break;
-		}
+while ((line = get_next_line(fd)) != NULL) {
+    if (!line) {
+        printf("Error\nget_next_line returned NULL unexpectedly\n");
+        continue; // Skip invalid lines
     }
+
+    printf("Debug: Read line: %s\n", line); // Debug log
+    line_count = process_map_line(map, line, line_count);
+    if (line_count >= max_line) {
+        printf("Error\nMap is too large\n");
+        break;
+    }
+}
+
 	map[line_count] = NULL; // Null-terminate the map
     close(fd);
 
