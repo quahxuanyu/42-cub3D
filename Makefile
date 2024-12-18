@@ -44,6 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@echo -e "\n\n\n\033[38;5;214m -- Done compiling cub3d, let game begin now ! --\033[0m"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)
@@ -66,8 +67,8 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(MLX_PATH) clean
-	$(MAKE) -C $(LIBFT_PATH) fclean
 	rm -f $(NAME)
+	rm -rf $(OBJDIR)
 
 re: fclean all
 
