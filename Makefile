@@ -13,6 +13,10 @@ PARDIR = $(SRCDIR)parsing/
 # Source files
 SRC_FILES = main.c \
             player.c \
+			init.c \
+			utils.c \
+			texture.c \
+			render.c \
             $(PARDIR)checking.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
@@ -60,7 +64,7 @@ $(LIBFT):
 clean:
 	$(MAKE) -C $(MLX_PATH) clean
 	$(MAKE) -C $(LIBFT_PATH) clean
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	$(MAKE) -C $(MLX_PATH) clean
