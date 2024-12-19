@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:20:03 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/18 12:46:43 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/19 15:41:17 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ void	init_texture(t_game *game, char *filename)
     int		line_length;
     int		endian;
 
+    printf("Loading texture: %s\n", filename);
     fd = open(filename, O_RDONLY);
     if (fd < 0)
     {
         printf("Error\nTexture file not found\n");
         exit(1);
     }
-	game->tex.width = 64;
-	game->tex.width = 64;
+	game->tex.width = TEXTURE_SIZE;
+	game->tex.width = TEXTURE_SIZE;
 	game->tex.img = mlx_xpm_file_to_image(game->mlx, filename, &game->tex.width, &game->tex.height);
     if (!game->tex.img)
     {

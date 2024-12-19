@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/19 15:14:40 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/19 15:46:53 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	ray_touch(t_game *game, float ray_x, float ray_y)
 	player_y = game->player.y;
 	if (touch(game, ray_x, ray_y))
 	{
+		//the sides does not work... (try change to lodev's implementation)
 		if (player_x - ray_x < player_y - ray_y)
 		{
 			if (player_x - ray_x > 0)

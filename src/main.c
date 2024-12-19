@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/19 14:42:37 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/19 15:34:21 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int main(void)
 	t_game game;
 
 	init_game(&game);
-	init_texture(&game, "/home/quahxuanyu/42KL/42-cub3D/textures/wood.xpm"); //for some reason need full path for it to find the file
+	init_texture(&game, "textures/wood.xpm"); // file path is relative to the path of the PROGRAM -> outside the source folder
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
