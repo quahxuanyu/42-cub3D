@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/18 12:46:37 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/19 14:42:37 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,60 +40,6 @@ void clear_image(t_game * game)
 		y = -1;
 		while (++y < screenHeight)
 			my_mlx_pixel_put(game, x, y, 0);
-	}
-}
-
-//IMPORTANT - Calculate the collision of the ray and walls
-bool touch(t_game *game, float px, float py)
-{
-	int	x;
-	int	y;
-	
-	//rounds to int to allow it to index the map, and check whether a wall exist
-	x = px / WALL_SIZE;
-	y = py / WALL_SIZE;
-	if (game->map[y][x] == '1')
-		return true;
-	return false;
-}
-
-void	draw_ray(t_game *game, float angle_diff, int x)
-{
-	float ray_x;
-	float ray_y;
-	float cos_angle;
-	float sin_angle;
-
-	// DDA Line Algorithm
-	ray_x = game->player.x; // Reset ray_x
-	ray_y = game->player.y; // Reset ray_y
-	cos_angle = cos(game->player.angle + angle_diff); // they are all below 1
-	sin_angle = sin(game->player.angle + angle_diff);
-	while (!touch(game, ray_x, ray_y))
-	{
-		if (VIEW_STATE == 2)
-			my_mlx_pixel_put(game, ray_x, ray_y, 0xFFFF00);
-		ray_x += cos_angle; //The 0 degree position poitns to the right
-		ray_y += sin_angle;
-	}
-	if (VIEW_STATE == 3)
-		three_d_projection(game, ray_x, ray_y, x);
-}
-
-void	raycast(t_game *game)
-{
-	float ray_x;
-	float ray_y;
-	float cos_angle;
-	float sin_angle;
-	float FOV = PI / 3;
-	float fraction = FOV / screenWidth;
-	float angle_diff = (FOV / 2) * -1;	
-	int i = -1;
-	while (++i < screenWidth)
-	{
-		draw_ray(game, angle_diff, i);
-		angle_diff += fraction;
 	}
 }
 

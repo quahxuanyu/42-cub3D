@@ -17,6 +17,7 @@ SRC_FILES = main.c \
 			utils.c \
 			texture.c \
 			render.c \
+			raycast.c \
             $(PARDIR)checking.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
