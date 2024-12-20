@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 16:53:58 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 18:35:56 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 #define screenWidth 1280 
 #define screenHeight 960
 #define WALL_SIZE 63
-#define VIEW_STATE 2 //2 for 2D, 3 for 3D
+#define VIEW_STATE 3 //2 for 2D, 3 for 3D
 
 #define TEXTURE_SIZE 64
+
 
 # define W 119
 # define A 97
@@ -41,6 +42,8 @@
 # define PLAYER_SPEED 2
 
 #define PI 3.14159265359
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 typedef	struct s_img
 {
@@ -58,12 +61,10 @@ typedef struct s_player
 	float	x;
 	float	y;
 	float	angle;
-	
 	bool	key_up;
 	bool	key_down;
 	bool 	key_left;
 	bool	key_right;
-	
 	bool	left_rotate;
 	bool	right_rotate;
 }	t_player;
@@ -73,16 +74,13 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	void		*img;
-	
 	char		*data;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
 	t_img		tex;
 	t_player	player;
-	
 	char		**map;
-	
 	int			side;
 }	t_game;
 
@@ -93,7 +91,7 @@ void			move_player(t_game *game, t_player *player);
 bool			touch(t_game *game, float px, float py);
 
 //init.c
-void			init_game(t_game *game);
+void			init_game(t_game *game, char *map_file);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
@@ -111,5 +109,6 @@ void			raycast(t_game *game);
 
 /* Parsing */
 int				check_input(int ac, char **av);
+char 			**check_each_line(t_game *game, char *file);
 
 #endif

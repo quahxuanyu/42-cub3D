@@ -24,7 +24,8 @@ SRC_FILES = main.c \
 			texture.c \
 			render.c \
 			raycast.c \
-            $(PARDIR)checking.c
+            $(PARDIR)checking.c\
+			$(PARDIR)checking_utils.c\
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))

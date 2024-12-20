@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 17:40:53 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 18:36:35 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@ int main(int ac, char **av)
     {
         return (1);
     }
-
-    init_game(&game);
+    printf("Debug: Checking each line of the map\n");
+    game.map = check_each_line(&game, av[1]);
+    printf("Debug: Finished checking each line of the map\n");
+    init_game(&game, av[1]);
 
     init_texture(&game, "textures/wood.xpm"); // Ensure this path is correct
 

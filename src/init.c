@@ -6,20 +6,20 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 17:39:31 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 18:35:29 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char **get_map(void)
+char **get_map(const char *file)
 {
     char **map;
     int fd;
     char *line;
     size_t i;
 
-    fd = open("map/test.cub", O_RDONLY);
+    fd = open(file , O_RDONLY);
     if (fd == -1)
     {
         perror("Error opening map file");
@@ -49,7 +49,7 @@ char **get_map(void)
     return map;
 }
 
-void init_game(t_game *game)
+void init_game(t_game *game, char *map_file)
 {
     init_player(&game->player);
     game->mlx = mlx_init();
@@ -79,7 +79,7 @@ void init_game(t_game *game)
         exit(EXIT_FAILURE);
     }
 
-    game->map = get_map();
+    game->map = get_map(map_file);
     if (!game->map)
     {
         printf("Error: Failed to get map\n");
