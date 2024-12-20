@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/17 13:10:15 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/20 15:57:59 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int key_press(int keycode, t_player *player)
 		player->left_rotate = true;
 	if (keycode == RIGHT)
 		player->right_rotate = true;
+	if (keycode == ESC)
+		exit(0);
 	return (0);
 }
 

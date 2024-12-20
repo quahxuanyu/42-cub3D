@@ -3,36 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2024/06/13 23:07:04 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/20 16:44:59 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*get_next_line(int fd)
+char *get_next_line(int fd)
 {
-	char		*buffer;
-	char		*line;
-	static char	*left_over[OPEN_MAX];
+    char *buffer;
+    char *line;
+    static char *left_over[1024];
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (NULL);
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	fill_buffer(fd, buffer, &left_over[fd]);
-	free(buffer);
-	line = set_line(&left_over[fd]);
-	if (!line)
-	{
-		free(left_over[fd]);
-		free(line);
-		return (NULL);
-	}
-	return (line);
+    printf("Debug: Entering get_next_line\n");
+
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+    {
+        printf("Error: Invalid file descriptor or buffer size\n");
+        return (NULL);
+    }
+
+    buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+    if (!buffer)
+    {
+        printf("Error: Failed to allocate buffer\n");
+        return (NULL);
+    }
+
+    printf("Debug: Filling buffer\n");
+    fill_buffer(fd, buffer, &left_over[fd]);
+    free(buffer);
+
+    printf("Debug: Setting line\n");
+    line = set_line(&left_over[fd]);
+    if (!line)
+    {
+        printf("Error: Failed to set line\n");
+        free(left_over[fd]);
+        free(line);
+        return (NULL);
+    }
+
+    printf("Debug: Exiting get_next_line\n");
+    return (line);
 }
 
 char	*copy_line(char *left_over)

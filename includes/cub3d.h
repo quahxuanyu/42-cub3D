@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/19 14:03:57 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/20 16:53:58 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CUB3D_H
 
 #include "../minilibx-linux/mlx.h"
+#include <../libft/libft.h>
 #include <math.h>
 #include <stdio.h> 
 #include <stdlib.h>
@@ -36,6 +37,7 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
+# define ESC 65307
 # define PLAYER_SPEED 2
 
 #define PI 3.14159265359
