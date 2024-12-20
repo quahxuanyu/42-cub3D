@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 16:58:50 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 17:32:57 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,13 @@ int draw_loop(t_game *game)
 
 int main(int ac, char **av)
 {
-	check_input(ac, av);
-    t_game game;
+	t_game game;
+	
+	 if (check_input(ac, av))
+    {
+        printf("Error\nInvalid input\n");
+        return (1);
+    }
 
     printf("Debug: Starting main function\n");
 
