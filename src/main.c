@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 17:32:57 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 17:36:25 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int main(int ac, char **av)
 	
 	 if (check_input(ac, av))
     {
-        printf("Error\nInvalid input\n");
+        printf("Debug : Error\nInvalid input\n");
         return (1);
     }
 
