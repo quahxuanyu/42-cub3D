@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 16:44:59 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/20 17:39:36 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char *get_next_line(int fd)
     char *buffer;
     char *line;
     static char *left_over[1024];
-
-    printf("Debug: Entering get_next_line\n");
 
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
     {
@@ -33,11 +31,9 @@ char *get_next_line(int fd)
         return (NULL);
     }
 
-    printf("Debug: Filling buffer\n");
     fill_buffer(fd, buffer, &left_over[fd]);
     free(buffer);
 
-    printf("Debug: Setting line\n");
     line = set_line(&left_over[fd]);
     if (!line)
     {
@@ -47,7 +43,6 @@ char *get_next_line(int fd)
         return (NULL);
     }
 
-    printf("Debug: Exiting get_next_line\n");
     return (line);
 }
 
