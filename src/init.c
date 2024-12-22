@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 18:35:29 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/22 16:52:26 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,16 @@ void init_game(t_game *game, char *map_file)
         printf("Error: Failed to get map\n");
         exit(EXIT_FAILURE);
     }
+
+    if (!init_player_position(game))
+    {
+        printf("Error: No valid player position found in map\n");
+        return false;
+    }
+    
+    // Add debug print
+    printf("Player initialized at: x=%f, y=%f, angle=%f\n", 
+           game->player.x, game->player.y, game->player.angle);
 
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }

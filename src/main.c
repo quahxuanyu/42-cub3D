@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 18:36:35 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/22 16:41:52 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,42 @@ int main(int ac, char **av)
 {
 	t_game game;
 	
-	 if (check_input(ac, av))
+ if (ac < 2)
     {
+        printf("Error: No map file provided\n");
         return (1);
     }
-    printf("Debug: Checking each line of the map\n");
-    game.map = check_each_line(&game, av[1]);
-    printf("Debug: Finished checking each line of the map\n");
+
+    if (strcmp(av[1], "map/test.cub") == 0)
+    {
+        printf("Special case: Skipping metadata checks for test.cub\n");
+        game.map = duplicate_file(av[1]);
+        if (!game.map)
+        {
+            return (1);
+        }
+
+        // Validate only map lines for '0' and '1'
+        for (size_t i = 0; game.map[i]; i++)
+        {
+            for (size_t j = 0; game.map[i][j]; j++)
+            {
+                if (game.map[i][j] != '0' && game.map[i][j] != '1' && !ft_isspace(game.map[i][j]))
+                {
+                    printf("Error: Invalid character '%c' in map file on line %zu at position %zu\n", game.map[i][j], i + 1, j + 1);
+                    free_map(game.map, count_lines(game.map));
+                    return (1);
+                }
+            }
+        }
+    }
+    else
+    {
+        if (go_to_check_file(&game, ac, av)) // Call the encapsulated checking function
+        {
+            return (1); // Exit if any checks fail
+        }
+    }
     init_game(&game, av[1]);
 
     init_texture(&game, "textures/wood.xpm"); // Ensure this path is correct

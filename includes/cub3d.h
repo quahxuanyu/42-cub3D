@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 18:35:56 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/22 16:31:17 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_game
 	char		*data;
 	int			bits_per_pixel;
 	int			line_length;
+	int			map_height;
 	int			endian;
 	t_img		tex;
 	t_player	player;
@@ -108,7 +109,15 @@ void			three_d_projection(t_game *game, float ray_x, float ray_y, int x);
 void			raycast(t_game *game);
 
 /* Parsing */
-int				check_input(int ac, char **av);
-char 			**check_each_line(t_game *game, char *file);
+int             check_input(int ac, char **av);
+char            **duplicate_file(const char *file);
+int 			is_valid_map_line(const char *line, size_t line_number);
+char            **check_each_line(char **map);
+int             validate_textures(t_game *game, char **file_lines);
+int             go_to_check_file(t_game *game, int ac, char **av);
+void 			free_map(char **map, size_t lines);
+int 			is_valid_color_line(const char *line);
+
+size_t 			count_lines(char **map);
 
 #endif

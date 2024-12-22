@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 17:39:36 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/22 16:23:11 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*copy_line(char *left_over)
 	int		i;
 
 	i = 0;
-	if (line_len(left_over) == 0 && !ft_strchr(left_over, '\n'))
+	if (line_len(left_over) == 0 && !ft_strchr_gnl(left_over, '\n'))
 		return (NULL);
 	line = malloc((line_len(left_over) + 1) * sizeof(char));
 	if (!line)
@@ -108,7 +108,7 @@ void	fill_buffer(int fd, char *buffer, char **left_over)
 		*left_over = ft_strjoin_special(temp, buffer, bytes_read);
 		free(temp);
 		temp = NULL;
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr_gnl(buffer, '\n'))
 			break ;
 	}
 }

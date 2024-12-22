@@ -26,6 +26,7 @@ SRC_FILES = main.c \
 			raycast.c \
             $(PARDIR)checking.c\
 			$(PARDIR)checking_utils.c\
+			$(PARDIR)check_map.c\
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))

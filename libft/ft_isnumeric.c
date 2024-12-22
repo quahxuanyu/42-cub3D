@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checking_utils.c                                   :+:      :+:    :+:   */
+/*   ft_isnumeric.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/20 17:56:31 by hheng             #+#    #+#             */
-/*   Updated: 2024/12/22 14:31:21 by hheng            ###   ########.fr       */
+/*   Created: 2024/12/22 12:51:02 by hheng             #+#    #+#             */
+/*   Updated: 2024/12/22 12:51:09 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-void print_err_msg(char *msg)
+bool ft_isnumeric(char *str)
 {
-	ft_printf("Error\n");
-	ft_printf(msg);
-	ft_printf("\n");
-	exit(EXIT_FAILURE);
-}
+    if (!str || !*str)
+        return false;
 
-void free_map(char **map, size_t lines)
-{
-    for (size_t i = 0; i < lines; i++)
-        free(map[i]);
-    free(map);
-}
+    int i = 0;
+    if (str[i] == '-' || str[i] == '+') // Handle optional sign
+        i++;
 
-size_t count_lines(char **map)
-{
-    size_t count = 0;
-    while (map[count])
-        count++;
-    return count;
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return false;
+        i++;
+    }
+
+    return true;
 }
