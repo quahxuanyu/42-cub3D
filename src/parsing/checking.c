@@ -6,13 +6,12 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2024/12/22 16:21:50 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/27 19:48:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-#include "../includes/cub3d.h"
 
 // Helper function to safely free map and return NULL
 static char **free_map_and_exit(char **map, size_t count, int fd)
