@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:52 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 16:09:05 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/22 16:22:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_strjoin_special(char const *s1, char const *s2, int bytes_read)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	char	*temp;
 	int		len;

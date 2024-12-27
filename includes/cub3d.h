@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/20 16:53:58 by hheng            ###   ########.fr       */
+/*   Updated: 2024/12/27 19:48:41 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <fcntl.h>
+#include <limits.h>
 #define mapWidth 18
 #define mapHeight 10
 // RATIO: 4:3
@@ -27,9 +28,10 @@
 #define screenWidth 1280 
 #define screenHeight 960
 #define WALL_SIZE 63
-#define VIEW_STATE 2 //2 for 2D, 3 for 3D
+#define VIEW_STATE 3 //2 for 2D, 3 for 3D
 
 #define TEXTURE_SIZE 64
+
 
 # define W 119
 # define A 97
@@ -41,6 +43,8 @@
 # define PLAYER_SPEED 2
 
 #define PI 3.14159265359
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 typedef	struct s_img
 {
@@ -58,12 +62,10 @@ typedef struct s_player
 	float	x;
 	float	y;
 	float	angle;
-	
 	bool	key_up;
 	bool	key_down;
 	bool 	key_left;
 	bool	key_right;
-	
 	bool	left_rotate;
 	bool	right_rotate;
 }	t_player;
@@ -73,16 +75,14 @@ typedef struct s_game
 	void		*mlx;
 	void		*win;
 	void		*img;
-	
 	char		*data;
 	int			bits_per_pixel;
 	int			line_length;
+	int			map_height;
 	int			endian;
 	t_img		tex;
 	t_player	player;
-	
 	char		**map;
-	
 	int			side;
 }	t_game;
 
@@ -93,7 +93,7 @@ void			move_player(t_game *game, t_player *player);
 bool			touch(t_game *game, float px, float py);
 
 //init.c
-void			init_game(t_game *game);
+void			init_game(t_game *game, char *map_file);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
@@ -110,6 +110,15 @@ void			three_d_projection(t_game *game, float ray_x, float ray_y, int x);
 void			raycast(t_game *game);
 
 /* Parsing */
-int				check_input(int ac, char **av);
+int             check_input(int ac, char **av);
+char            **duplicate_file(const char *file);
+int 			is_valid_map_line(const char *line, size_t line_number);
+char            **check_each_line(char **map);
+int             validate_textures(t_game *game, char **file_lines);
+int             go_to_check_file(t_game *game, int ac, char **av);
+void 			free_map(char **map, size_t lines);
+int 			is_valid_color_line(const char *line);
+
+size_t 			count_lines(char **map);
 
 #endif

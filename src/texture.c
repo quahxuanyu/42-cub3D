@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:20:03 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/18 12:46:43 by xquah            ###   ########.fr       */
+/*   Updated: 2024/12/27 19:48:34 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <limits.h>
 
 void	init_texture(t_game *game, char *filename)
 {
