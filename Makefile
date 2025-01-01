@@ -25,9 +25,14 @@ SRC_FILES = main.c \
             texture.c \
             $(INITDIR)init.c \
             $(INITDIR)init_2.c \
-            $(PARDIR)checking.c\
+            $(PARDIR)check_map_element.c\
+			$(PARDIR)check_map_element2.c\
+			$(PARDIR)check_map_utils.c\
             $(PARDIR)checking_utils.c\
             $(PARDIR)check_map.c\
+			$(PARDIR)checking.c\
+			$(PARDIR)parse_player.c\
+			$(PARDIR)parse_store_map.c\
             $(PLAYERDIR)player.c\
             $(PLAYERDIR)player2.c\
             $(RAYCASTDIR)raycast.c\

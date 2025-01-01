@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 16:33:02 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 22:43:21 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void setup_hooks(t_game *game)
 int main(int ac, char **av)
 {
     t_game game;
+    char **temp_map;
+    // Check the input and the file
+    if (!go_to_check_file(&game, ac, av))
+    {
+        return (1); // Exit if the input or file is invalid
+    }
+    printf("Debug: File checked successfully\n");
+//    map_checking(&game, temp_map);
     init_all(&game, av[1], av[2]);
     setup_hooks(&game);
 

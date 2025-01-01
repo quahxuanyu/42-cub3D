@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 16:42:31 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 22:01:07 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 
+typedef struct s_rgb
+{
+    int r;
+    int g;
+    int b;
+} t_rgb;
+
 typedef	struct s_img
 {
 	void	*img;
@@ -56,6 +63,20 @@ typedef	struct s_img
 	int		line_length;
 	int		endian;
 }	t_img;
+
+typedef struct s_map_data
+{
+    t_img   n_img;
+    t_img   s_img;
+    t_img   w_img;
+    t_img   e_img;
+    t_rgb   c_rgb;
+    t_rgb   f_rgb;
+    char    **map;
+    int     width;
+    int     height;
+} t_map_data;
+
 
 typedef struct s_player
 {
@@ -82,6 +103,7 @@ typedef struct s_game
 	int			endian;
 	t_img		tex;
 	t_player	player;
+	t_map_data  map_data;
 	char		**map;
 	int			side;
 }	t_game;
@@ -98,6 +120,7 @@ bool 	init_player_position(t_game *game);
 //init.c
 void			init_game(t_game *game, char *map_file);
 char 			**get_map(const char *file);
+void 			init_mlx(t_game *game);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
@@ -116,16 +139,34 @@ void			raycast(t_game *game);
 int 			draw_loop(t_game *game);
 
 /* Parsing */
-int             check_input(int ac, char **av);
-char            **duplicate_file(const char *file);
-int 			is_valid_map_line(const char *line, size_t line_number);
-char            **check_each_line(char **map);
-int             validate_textures(t_game *game, char **file_lines);
-int             go_to_check_file(t_game *game, int ac, char **av);
-void 			free_map(char **map, size_t lines);
-int 			is_valid_color_line(const char *line);
+void check_first_and_last_line(t_game *game, char **temp_map);
+void    check_first_and_last_char(t_game *game);
+char *trim_from_back(int len, char *temp_map);
+char **map_trim_spaces_newline_from_the_back(char **temp_map);
+void map_checking(t_game *game, char **temp_map);
+void    check_only_one_player(t_game *game);
+char    **get_map_trim_newline(t_game *game, char **temp_map);
+void	check_empty_lines(char **temp_map);
+void    pad_map_with_spaces(t_game *game, char **temp_map);
+void	check_middle_map_line(t_game *game);
+int	check_correct_order(char *str, int check);
+int	get_first_line(char **temp_map, int first_line);
+int	get_last_line(char **temp_map, int last_line);
+void    check_invalid_character(t_game *game);
+void    set_player_angle(t_game *game, char direction);
+void    malloc_map(t_game *game);
 
-size_t 			count_lines(char **map);
+
+int check_input(int ac, char **av);
+void	check_for_ones(char *str, int i);
+void	check_extra_character(char **split);
+
+char **duplicate_file(const char *file);
+int validate_textures(t_game *game);
+int go_to_check_file(t_game *game, int ac, char **av);
+void print_err_msg(char *msg);
+int	ft_count_lines(int fd);
+void	ft_freesplit(char **split);
 
 //main.c
 void 			init_all(t_game *game, char *map_file, char *texture_file);
