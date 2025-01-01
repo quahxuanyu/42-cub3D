@@ -6,35 +6,11 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/22 16:52:53 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 16:14:28 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-// Add this function to trim spaces and validate map lines
-char *trim_and_validate_map_line(const char *line)
-{
-    if (!line)
-        return NULL;
-        
-    // Skip leading spaces
-    while (*line && (*line == ' ' || *line == '\t'))
-        line++;
-        
-    // Get length without trailing spaces
-    size_t len = ft_strlen(line);
-    while (len > 0 && (line[len-1] == ' ' || line[len-1] == '\t'))
-        len--;
-        
-    // Allocate and copy trimmed line
-    char *trimmed = malloc(len + 1);
-    if (!trimmed)
-        return NULL;
-    ft_strlcpy(trimmed, line, len + 1);
-    
-    return trimmed;
-}
 
 // Modify touch function to handle spaces
 bool touch(t_game *game, float px, float py)
@@ -58,41 +34,6 @@ bool touch(t_game *game, float px, float py)
     char cell = game->map[map_y][map_x];
     return (cell == '1' || cell == ' ');
 }
-
-// Add this function to find and set player position
-bool init_player_position(t_game *game)
-{
-    const char player_chars[] = "NSEW";
-    int found = 0;
-    
-    for (int y = 0; game->map[y]; y++)
-    {
-        for (int x = 0; game->map[y][x]; x++)
-        {
-            char cell = game->map[y][x];
-            if (ft_strchr(player_chars, cell))
-            {
-                game->player.x = x * WALL_SIZE + (WALL_SIZE / 2);
-                game->player.y = y * WALL_SIZE + (WALL_SIZE / 2);
-                
-                // Set initial angle based on direction
-                if (cell == 'N') game->player.angle = -PI/2;
-                else if (cell == 'S') game->player.angle = PI/2;
-                else if (cell == 'E') game->player.angle = 0;
-                else if (cell == 'W') game->player.angle = PI;
-                
-                found = 1;
-                // Replace player position with empty space
-                game->map[y][x] = '0';
-                break;
-            }
-        }
-        if (found) break;
-    }
-    
-    return found;
-}
-
 
 bool	ray_touch(t_game *game, float ray_x, float ray_y)
 {

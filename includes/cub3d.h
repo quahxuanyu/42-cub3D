@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/27 19:48:41 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 16:42:31 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,17 @@ int				key_release(int keycode, t_player *player);
 void			move_player(t_game *game, t_player *player);
 bool			touch(t_game *game, float px, float py);
 
+//player.c
+bool 	init_player_position(t_game *game);
+
 //init.c
 void			init_game(t_game *game, char *map_file);
+char 			**get_map(const char *file);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void			draw_square(int x, int y, int size, int color, t_game *game);
+void 			setup_hooks(t_game *game);
 
 //texture.c
 unsigned int	get_pixel_color(t_img *tex, int x, int y);
@@ -108,6 +113,7 @@ void			three_d_projection(t_game *game, float ray_x, float ray_y, int x);
 
 //raycast.c
 void			raycast(t_game *game);
+int 			draw_loop(t_game *game);
 
 /* Parsing */
 int             check_input(int ac, char **av);
@@ -121,4 +127,7 @@ int 			is_valid_color_line(const char *line);
 
 size_t 			count_lines(char **map);
 
-#endif
+//main.c
+void 			init_all(t_game *game, char *map_file, char *texture_file);
+
+#endif 
