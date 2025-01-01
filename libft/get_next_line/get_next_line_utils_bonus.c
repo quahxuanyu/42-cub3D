@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:52 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/22 16:22:28 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 22:31:21 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_strchr_gnl(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup_gnl(const char *s1)
 {
 	int		i;
 	char	*str;

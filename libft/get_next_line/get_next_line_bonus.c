@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2024/12/22 16:23:11 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/01 22:31:47 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,21 @@ char	*copy_line(char *left_over)
 
 char	*set_line(char **left_over)
 {
-	char	*line;
-	char	*temp;
+    char	*line;
+    char	*temp;
 
-	if (!*left_over)
-		return (NULL);
-	temp = *left_over;
-	line = copy_line(*left_over);
-	*left_over = ft_strdup(*left_over + line_len(*left_over));
-	if (!**left_over)
-	{
-		free(*left_over);
-		*left_over = NULL;
-	}
-	free(temp);
-	return (line);
+    if (!*left_over)
+        return (NULL);
+    temp = *left_over;
+    line = copy_line(*left_over);
+    *left_over = ft_strdup_gnl(*left_over + line_len(*left_over));
+    if (!*left_over || !**left_over)
+    {
+        free(*left_over);
+        *left_over = NULL;
+    }
+    free(temp);
+    return (line);
 }
 
 void	fill_buffer(int fd, char *buffer, char **left_over)

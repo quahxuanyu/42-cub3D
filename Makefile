@@ -13,20 +13,30 @@ SRCDIR = src/
 OBJDIR = objs/
 MAPDIR = maps/
 
-# Parsing directory
+# sub directory
 PARDIR = $(SRCDIR)parsing/
+INITDIR = $(SRCDIR)initialize/
+RAYCASTDIR = $(SRCDIR)raycast/
+PLAYERDIR = $(SRCDIR)player/
 
 # Source files
 SRC_FILES = main.c \
-            player.c \
-			init.c \
-			utils.c \
-			texture.c \
-			render.c \
-			raycast.c \
-            $(PARDIR)checking.c\
-			$(PARDIR)checking_utils.c\
-			$(PARDIR)check_map.c\
+            render.c \
+            texture.c \
+            $(INITDIR)init.c \
+            $(INITDIR)init_2.c \
+            $(PARDIR)check_map_element.c\
+			$(PARDIR)check_map_element2.c\
+			$(PARDIR)check_map_utils.c\
+            $(PARDIR)checking_utils.c\
+            $(PARDIR)check_map.c\
+			$(PARDIR)checking.c\
+			$(PARDIR)parse_player.c\
+			$(PARDIR)parse_store_map.c\
+            $(PLAYERDIR)player.c\
+            $(PLAYERDIR)player2.c\
+            $(RAYCASTDIR)raycast.c\
+            $(RAYCASTDIR)raycast_utils.c\
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
@@ -45,7 +55,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # Include directories
-INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PARDIR) -I $(MAPDIR)
+INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PARDIR) -I $(INITDIR) -I $(PLAYERDIR) -I $(RAYCASTDIR) -I $(MAPDIR)
 
 # Linker flags
 LDFLAGS = -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft -lm -lbsd -lX11 -lXext
@@ -55,13 +65,28 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
-	 @echo -e "\n\n\n$(YELLOW) -- DONE COMPILING CUB3D, LET'S BEGIN THE GAME NOW ! --$(RESET)"
+	@echo -e "\n\n\n$(YELLOW) -- DONE COMPILING CUB3D, LET'S BEGIN THE GAME NOW ! --$(RESET)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)
-	$(CC) $(INCLUDES) -c $< -o $@
+	@mkdir -p $(OBJDIR)initialize
+	@mkdir -p $(OBJDIR)raycast
+	@mkdir -p $(OBJDIR)player
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(PARDIR)%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR)%.o: $(INITDIR)%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR)%.o: $(PLAYERDIR)%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR)%.o: $(RAYCASTDIR)%.c
 	@mkdir -p $(OBJDIR)
 	$(CC) $(INCLUDES) -c $< -o $@
 
