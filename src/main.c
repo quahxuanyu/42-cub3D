@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 22:43:21 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/02 21:26:54 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,11 @@ int main(int ac, char **av)
     char **temp_map;
     // Check the input and the file
     if (!go_to_check_file(&game, ac, av))
-    {
         return (1); // Exit if the input or file is invalid
-    }
     printf("Debug: File checked successfully\n");
 //    map_checking(&game, temp_map);
     init_all(&game, av[1], av[2]);
     setup_hooks(&game);
-
 // Start the rendering loop
     mlx_loop(game.mlx);
 

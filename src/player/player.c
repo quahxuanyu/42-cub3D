@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 16:10:52 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/03 15:48:46 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,66 +51,19 @@ int key_release(int keycode, t_player *player)
 
 void	move_player(t_game *game, t_player *player)
 {
-	float	angle_speed;
-	float cos_angle;
-	float sin_angle;
-
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
-	angle_speed = 0.01;
-	
-	if (player->left_rotate)
-		player->angle -= angle_speed;
-	if (player->right_rotate)
-		player->angle += angle_speed;
-	if (player->angle > 2 * PI)
-		player->angle = 0;
-	if (player->angle < 0)
-		player->angle = 2 * PI;
-	
-	printf("angle: %f\n", player->angle);
-	if (player->key_up && !touch(game, player->x + cos_angle * PLAYER_SPEED, player->y + sin_angle * PLAYER_SPEED))
-	{
-		player->x += cos_angle * PLAYER_SPEED;
-		player->y += sin_angle * PLAYER_SPEED;
-	}
-	if (player->key_down && !touch(game, player->x - cos_angle * PLAYER_SPEED, player->y - sin_angle * PLAYER_SPEED))
-	{
-		player->x -= cos_angle * PLAYER_SPEED;
-		player->y -= sin_angle * PLAYER_SPEED;
-	}
-	if (player->key_left && !touch(game, player->x + sin_angle * PLAYER_SPEED, player->y - cos_angle * PLAYER_SPEED))
-	{
-		player->x += sin_angle * PLAYER_SPEED;
-		player->y -= cos_angle * PLAYER_SPEED;
-	}
-	if (player->key_right && !touch(game, player->x - sin_angle * PLAYER_SPEED, player->y + cos_angle * PLAYER_SPEED))
-	{
-		player->x -= sin_angle * PLAYER_SPEED;
-		player->y += cos_angle * PLAYER_SPEED;
-	}
-}
-
-/*	if (player->key_up)
-	{
-		player->x -= sin_angle * speed;
-		player->y -= cos_angle * speed;
-	}
+	if (player->key_up)
+		move_up(game);
 	if (player->key_down)
-	{
-		player->x += sin_angle * speed;
-		player->y += cos_angle * speed;
-	}
+		move_down(game);
 	if (player->key_left)
-	{
-		player->x -= cos_angle * speed;
-		player->y += sin_angle * speed;
-	}
+		move_left(game);
 	if (player->key_right)
-	{
-		player->x += cos_angle * speed;
-		player->y -= sin_angle * speed;
-	}*/
+		move_right(game);
+	if (player->left_rotate)
+		rotate_left(game);
+	if (player->right_rotate)
+		rotate_right(game);
+}
 
 bool init_player_position(t_game *game)
 {
@@ -124,8 +77,8 @@ bool init_player_position(t_game *game)
             char cell = game->map[y][x];
             if (ft_strchr(player_chars, cell))
             {
-                game->player.x = x * WALL_SIZE + (WALL_SIZE / 2);
-                game->player.y = y * WALL_SIZE + (WALL_SIZE / 2);
+                game->player.pos_x = x * WALL_SIZE + (WALL_SIZE / 2);
+                game->player.pos_y = y * WALL_SIZE + (WALL_SIZE / 2);
                 
                 // Set initial angle based on direction
                 if (cell == 'N') game->player.angle = -PI/2;

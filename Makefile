@@ -34,7 +34,8 @@ SRC_FILES = main.c \
 			$(PARDIR)parse_player.c\
 			$(PARDIR)parse_store_map.c\
             $(PLAYERDIR)player.c\
-            $(PLAYERDIR)player2.c\
+            $(PLAYERDIR)rotate.c\
+			$(PLAYERDIR)movement.c\
             $(RAYCASTDIR)raycast.c\
             $(RAYCASTDIR)raycast_utils.c\
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 19:36:32 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/01 21:35:33 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:34:36 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void    check_only_one_player(t_game *game)
             {
                 count_player++;
                 // Store player position and direction when found
-                game->player.x = (float)j;
-                game->player.y = (float)i;
+                game->player.pos_x = (float)j;
+                game->player.pos_y = (float)i;
                 game->player.angle = (game->map[i][j] == 'N') ? 270 :
                                    (game->map[i][j] == 'S') ? 90 :
                                    (game->map[i][j] == 'W') ? 180 : 0;

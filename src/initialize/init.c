@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 16:45:25 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/02 15:48:06 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,6 @@ char **get_map(const char *file)
     return map;
 }
 
-void init_game(t_game *game, char *map_file)
-{    // Load and validate map
-    game->map = get_map(map_file);
-    if (!game->map)
-    {
-        printf("Error: Failed to get map\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // // Initialize player position
-    // if (!init_player_position(game))
-    // {
-    //     printf("Error: No valid player position found in map\n");
-    //     exit(EXIT_FAILURE);
-    // }
-
-    // Debug print for player position
-    printf("Player initialized at: x=%f, y=%f, angle=%f\n", 
-           game->player.x, game->player.y, game->player.angle);
-}
-
 void init_mlx(t_game *game)
 {
     game->mlx = mlx_init();
@@ -103,7 +82,7 @@ void init_mlx(t_game *game)
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 
-
+//NOT WORKING
 void	init_texture(t_game *game, char *filename)
 {
     int		fd;
@@ -129,19 +108,4 @@ void	init_texture(t_game *game, char *filename)
     game->tex.bits_per_pixel = bits_per_pixel;
     game->tex.line_length = line_length;
     game->tex.endian = endian;
-}
-
-void	init_player(t_player *player)
-{
-	player->x = screenWidth / 2;
-	player->y = screenHeight / 2;
-	player->angle = 0;
-
-	player->key_up = false;
-	player->key_down = false;
-	player->key_right = false;
-	player->key_left = false;
-	
-	player->left_rotate = false;
-	player->right_rotate = false;
 }

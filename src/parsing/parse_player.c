@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 21:16:59 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/01 21:26:33 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/03 21:34:51 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void    store_player_position(t_game *game)
             if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
                 || game->map[i][j] == 'W' || game->map[i][j] == 'E')
             {
-                game->player.x = (float)j;
-                game->player.y = (float)i;
+                game->player.pos_x = (float)j;
+                game->player.pos_y = (float)i;
                 set_player_angle(game, game->map[i][j]);
             }
             j++;

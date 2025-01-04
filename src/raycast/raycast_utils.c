@@ -3,112 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 22:33:48 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 16:11:30 by hheng            ###   ########.fr       */
+/*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
+/*   Updated: 2025/01/04 16:41:34 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
+void    init_ray(t_player *player, t_ray *ray, int x)
 {
-	char	*dst;
-
-	if (x >= screenWidth || y >= screenHeight || x < 0 || y < 0)
-		return ;
-	dst = game->data + (y * game->line_length + x * (game->bits_per_pixel / 8));
-	*(unsigned int*) dst = color;
+    ray->camera_perc = 2 * x / (double)screenWidth - 1;
+    ray->dir_x = player->dir_x + player->plane_x * ray->camera_perc;
+    ray->dir_y = player->dir_y + player->plane_y * ray->camera_perc;
+    ray->map_x = (int)player->pos_x;
+    ray->map_y = (int)player->pos_y;
+    ray->delta_dist_x = fabs(1 / ray->dir_x);
+    ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 
-void	draw_square(int x, int y, int size, int color, t_game *game)
+void    get_initial_dist(t_player *player, t_ray *ray)
 {
-	int	i;
-
-	i = -1;
-	while (++i < size)
-		my_mlx_pixel_put(game, x + i, y, color);
-	i = -1;
-	while (++i < size)
-		my_mlx_pixel_put(game, x, y + i, color);
-	i = -1;
-	while (++i < size)
-		my_mlx_pixel_put(game, x + i, y + size, color);
-	i = -1;
-	while (++i <= size)
-		my_mlx_pixel_put(game, x + size, y + i, color);
-}
-
-void draw_map(t_game *game)
-{
-    int x;
-    int y;
-
-    y = -1;
-    if (!game->map)
+    if (ray->dir_x >= 0)
     {
-        printf("Error: game->map is NULL\n");
-        return;
-    }
-
-
-    while (game->map[++y])
-    {
-        if (!game->map[y])
-        {
-            printf("Error: game->map[%d] is NULL\n", y);
-            return;
-        }
-
-        x = -1;
-        while (game->map[y][++x])
-        {
-            if (game->map[y][x] == '1')
-            {
-                draw_square(x * WALL_SIZE, y * WALL_SIZE, WALL_SIZE, 0x0000FF, game);
-            }
-        }
-    }
-
-}
-
-void clear_image(t_game * game)
-{
-	int x;
-	int y;
-
-	x = -1;
-	while (++x < screenWidth)
-	{
-		y = -1;
-		while (++y < screenHeight)
-			my_mlx_pixel_put(game, x, y, 0);
-	}
-}
-
-
-//for raycast
-int draw_loop(t_game *game)
-{
-    t_player *player = &game->player;
-
-    move_player(game, player);
-    clear_image(game);
-
-    if (VIEW_STATE == 2)
-    {
-        draw_map(game);
-        raycast(game);
-        draw_square(player->x, player->y, 10, 0x00FFFF, game);
+        ray->step_x = 1;
+        ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
     }
     else
     {
-        raycast(game);
+        ray->step_x = -1;
+        ray->side_dist_x = (player->pos_x - ray->map_x) * ray->delta_dist_x;
     }
+    if (ray->dir_y >= 0)
+    {
+        ray->step_y = 1;
+        ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+    }
+    else
+    {
+        ray->step_y = -1;
+        ray->side_dist_y = (player->pos_y - ray->map_y) * ray->delta_dist_y;
+    }
+}
 
-    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+void    dda_algo(t_game *game, t_player *player, t_ray *ray)
+{
+    int hit;
 
+    hit = 0;
+    // perform DDA
+    while (hit == 0)
+    {
+        // jump to next map square, either in x-direction, or in y-direction
+        if (ray->side_dist_x < ray->side_dist_y)
+        {
+            ray->side_dist_x += ray->delta_dist_x;
+            ray->map_x += ray->step_x;
+            ray->side = 0;
+        }
+        else
+        {
+            ray->side_dist_y += ray->delta_dist_y;
+            ray->map_y += ray->step_y;
+            ray->side = 1;
+        }
+        // Check if ray has hit a wall
+        if (game->map_data.map[ray->map_x][ray->map_y] == '1')
+            hit = 1;
+    }
+}
 
-    return (0);
+void    calc_wall_dist(t_ray *ray)
+{
+    if (ray->side == VERTICAL)
+        ray->wall_dist = ray->side_dist_x - ray->delta_dist_x;
+    else if (ray->side == HORIZONTAL)
+        ray->wall_dist = ray->side_dist_y - ray->delta_dist_y;
+}
+
+void    draw_line_on_image(t_game *game, t_ray *ray, int x)
+{
+    int line_height;
+    int draw_start;
+    int draw_end;
+    
+    line_height = (int)(screenHeight / ray->wall_dist);
+    draw_start = screenHeight / 2 - line_height / 2;
+    draw_end = screenHeight / 2 + line_height / 2;
+    while (draw_start < draw_end)
+    {
+        if (ray->side == VERTICAL)
+            my_mlx_pixel_put(game, x, draw_start, 0x0000FF);
+        else
+            my_mlx_pixel_put(game, x, draw_start, 0x00FF00);
+        draw_start++;
+    }
 }
