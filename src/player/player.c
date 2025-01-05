@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/03 15:48:46 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/05 14:57:03 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,36 @@ int key_release(int keycode, t_player *player)
 	return (0);
 }
 
+bool touch(t_game *game, float px, float py)
+{
+	int map_x;
+	int map_y;
+
+	map_x = (int)px;
+	map_y = (int)py;
+	//Debug
+	// for (int i = 0; i < 10; i++)
+	// {
+	// 	printf("%s", game->map_data.map[i]);
+	// }
+	printf("\nmap_x: %d, map_y: %d\n", map_x, map_y);
+	printf("to move x: %f, to move y: %f\n", px, py);
+	printf("player->pos_x: %f, player->pos_y: %f\n", game->player.pos_x, game->player.pos_y);
+	printf("player->dir_x: %f, player->dir_y: %f\n", game->player.dir_x, game->player.dir_y);
+	// Consider spaces as walls
+	return (game->map_data.map[map_y][map_x] == '1' || game->map_data.map[map_y][map_x] == ' ');
+}
+
 void	move_player(t_game *game, t_player *player)
 {
-	if (player->key_up)
+	//Update, give player a set size to prevent camera flat on the wall
+	if (player->key_up && !touch(game, game->player.pos_x + game->player.dir_x * MOVE_SPEED * 2, game->player.pos_y + game->player.dir_y * MOVE_SPEED * 2))
 		move_up(game);
-	if (player->key_down)
+	if (player->key_down && !touch(game, game->player.pos_x - game->player.dir_x * MOVE_SPEED * 2, game->player.pos_y - game->player.dir_y * MOVE_SPEED * 2))
 		move_down(game);
-	if (player->key_left)
+	if (player->key_left && !touch(game, game->player.pos_x + game->player.dir_y * MOVE_SPEED * 2, game->player.pos_y - game->player.dir_x * MOVE_SPEED * 2))
 		move_left(game);
-	if (player->key_right)
+	if (player->key_right && !touch(game, game->player.pos_x - game->player.dir_y * MOVE_SPEED * 2, game->player.pos_y + game->player.dir_x * MOVE_SPEED * 2))
 		move_right(game);
 	if (player->left_rotate)
 		rotate_left(game);

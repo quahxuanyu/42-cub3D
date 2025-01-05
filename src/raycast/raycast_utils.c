@@ -6,7 +6,7 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/04 16:41:34 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/05 14:20:40 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void    dda_algo(t_game *game, t_player *player, t_ray *ray)
             ray->side = 1;
         }
         // Check if ray has hit a wall
-        if (game->map_data.map[ray->map_x][ray->map_y] == '1')
+        if (game->map_data.map[ray->map_y][ray->map_x] == '1')
             hit = 1;
     }
 }

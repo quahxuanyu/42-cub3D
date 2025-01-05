@@ -6,13 +6,17 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/02 21:21:08 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/05 15:00:42 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-//Later when parsing is finished, we will initialize the player position from the map
+/***
+ * @brief Initialize player's position and direction
+ * @note Later when parsing is finished, we will initialize the player position from the map
+ * @note CURRENT: Set player position to (5, 5) and North facing
+ */
 void	init_player(t_player *player)
 {
     player->dir = 'N'; //set facing north for now
@@ -22,6 +26,12 @@ void	init_player(t_player *player)
     player->dir_y = -1;
     player->plane_x = 0.66;
     player->plane_y = 0;
+    player->key_up = false;
+    player->key_down = false;
+    player->key_left = false;
+    player->key_right = false;
+    player->left_rotate = false;
+    player->right_rotate = false;
 }
 
 // Parsing Helper function to initialize map data
