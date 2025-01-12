@@ -6,33 +6,11 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/12 14:08:51 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:15:57 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-/***
- * @brief Initialize player's position and direction
- * @note Later when parsing is finish initialize the player position from file
- * @note CURRENT: (Hardcode) Set player position to (5, 5) and North facing
- */
-void	init_player(t_player *player)
-{
-    player->dir = 'N'; //set facing north for now
-    player->pos_x = 5 + 0.5; //set in middle for now
-    player->pos_y = 5 + 0.5; //set in middle for now
-    player->dir_x = 0;
-    player->dir_y = -1;
-    player->plane_x = 0.66;
-    player->plane_y = 0;
-    player->key_up = false;
-    player->key_down = false;
-    player->key_left = false;
-    player->key_right = false;
-    player->left_rotate = false;
-    player->right_rotate = false;
-}
 
 /***
  * @brief Initialize the player, map, texture

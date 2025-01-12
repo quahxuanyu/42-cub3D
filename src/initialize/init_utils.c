@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_2.c                                           :+:      :+:    :+:   */
+/*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 14:43:09 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:16:08 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,28 @@ char    **get_map(const char *file)
     map[i] = NULL; // Null terminate the map
     close(fd);
     return map;
+}
+
+/***
+ * @brief Initialize player's position and direction
+ * @note Later when parsing is finish initialize the player position from file
+ * @note CURRENT: (Hardcode) Set player position to (5, 5) and North facing
+ */
+void    init_player(t_player *player)
+{
+    player->dir = 'N';       // set facing north for now
+    player->pos_x = 5 + 0.5; // set in middle for now
+    player->pos_y = 5 + 0.5; // set in middle for now
+    player->dir_x = 0;
+    player->dir_y = -1;
+    player->plane_x = 0.66;
+    player->plane_y = 0;
+    player->key_up = false;
+    player->key_down = false;
+    player->key_left = false;
+    player->key_right = false;
+    player->left_rotate = false;
+    player->right_rotate = false;
 }
 
 /**
