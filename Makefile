@@ -18,26 +18,27 @@ PARDIR = $(SRCDIR)parsing/
 INITDIR = $(SRCDIR)initialize/
 RAYCASTDIR = $(SRCDIR)raycast/
 PLAYERDIR = $(SRCDIR)player/
+UTILSDIR = $(SRCDIR)utils/
 
 # Source files
 SRC_FILES = main.c \
-            render.c \
-            texture.c \
             $(INITDIR)init.c \
-            $(INITDIR)init_2.c \
-            $(PARDIR)check_map_element.c\
-			$(PARDIR)check_map_element2.c\
-			$(PARDIR)check_map_utils.c\
-            $(PARDIR)checking_utils.c\
-            $(PARDIR)check_map.c\
-			$(PARDIR)checking.c\
-			$(PARDIR)parse_player.c\
-			$(PARDIR)parse_store_map.c\
-            $(PLAYERDIR)player.c\
-            $(PLAYERDIR)rotate.c\
-			$(PLAYERDIR)movement.c\
-            $(RAYCASTDIR)raycast.c\
-            $(RAYCASTDIR)raycast_utils.c\
+            $(INITDIR)init_utils.c \
+            $(PARDIR)check_map_element.c \
+			$(PARDIR)check_map_element2.c \
+			$(PARDIR)check_map_utils.c \
+            $(PARDIR)checking_utils.c \
+            $(PARDIR)check_map.c \
+			$(PARDIR)checking.c \
+			$(PARDIR)parse_player.c \
+			$(PARDIR)parse_store_map.c \
+            $(PLAYERDIR)player.c \
+            $(PLAYERDIR)rotate.c \
+			$(PLAYERDIR)movement.c \
+            $(RAYCASTDIR)raycast.c \
+            $(RAYCASTDIR)raycast_utils.c \
+			$(RAYCASTDIR)texture.c \
+			$(UTILSDIR)utils.c
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
@@ -84,6 +85,10 @@ $(OBJDIR)%.o: $(INITDIR)%.c
 	$(CC) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(PLAYERDIR)%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(INCLUDES) -c $< -o $@
+	
+$(OBJDIR)%.o: $(UTILSDIR)%.c
 	@mkdir -p $(OBJDIR)
 	$(CC) $(INCLUDES) -c $< -o $@
 

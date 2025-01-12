@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_utils.c                                    :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:33:48 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/04 16:40:34 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/12 13:42:24 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 	*(unsigned int*) dst = color;
 }
 
-void clear_image(t_game * game)
+void    clear_image(t_game *game)
 {
 	int x;
 	int y;
@@ -36,6 +36,30 @@ void clear_image(t_game * game)
 	}
 }
 
+void    set_ceiling_floor(t_game *game)
+{
+    int x;
+    int y;
+
+    x = -1;
+    while (++x < screenWidth)
+    {
+        y = -1;
+        while (++y < screenHeight)
+        {
+            if (y < screenHeight / 2)
+                my_mlx_pixel_put(game, x, y, game->map_data.c_rgb);
+            else
+                my_mlx_pixel_put(game, x, y, game->map_data.f_rgb);
+        }
+    }
+}
+
+/***
+ * @brief The main raycasting function.
+ * @brief Shoots a ray for every pixel of the screen width
+ * @param game the game structure
+ */
 void	raycast(t_game *game)
 {
     int x;
@@ -49,14 +73,4 @@ void	raycast(t_game *game)
         calc_wall_dist(&game->ray);
         draw_line_on_image(game, &game->ray, x);
     }
-}
-
-//for raycast
-int draw_loop(t_game *game)
-{
-    move_player(game, &game->player);
-    clear_image(game);
-    raycast(game);
-    mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
-    return (0);
 }

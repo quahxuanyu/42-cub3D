@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 14:20:03 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 15:43:51 by hheng            ###   ########.fr       */
+/*   Created: 2025/01/12 14:23:02 by xquah             #+#    #+#             */
+/*   Updated: 2025/01/12 14:40:50 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-unsigned int	get_pixel_color(t_img *tex, int x, int y)
+void	free_all(t_game *game)
 {
-    char	*pixel;
-    int		color;
-
-    pixel = tex->addr + (y * tex->line_length + x * (tex->bits_per_pixel / 8));
-    color = *(unsigned int *)pixel;
-    return (color);
+	//ADD free the map
+	free(game->map_data.wall_tex); // free the texture
 }

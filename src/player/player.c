@@ -6,29 +6,31 @@
 /*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/05 14:57:03 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/12 14:37:13 by xquah            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int key_press(int keycode, t_player *player)
+int key_press(int keycode, t_game *game)
 {
-	// printf("keycode: %d\n", keycode);
 	if (keycode == W)
-		player->key_up = true;
+		game->player.key_up = true;
 	if (keycode == S)
-		player->key_down = true;
+		game->player.key_down = true;
 	if (keycode == A)
-		player->key_left = true;
+		game->player.key_left = true;
 	if (keycode == D)
-		player->key_right = true;
+		game->player.key_right = true;
 	if (keycode == LEFT)
-		player->left_rotate = true;
+		game->player.left_rotate = true;
 	if (keycode == RIGHT)
-		player->right_rotate = true;
+		game->player.right_rotate = true;
 	if (keycode == ESC)
-		exit(0);
+	{
+		free_all(game); // change to free_and_exit() later
+		exit(EXIT_SUCCESS);
+	}
 	return (0);
 }
 
@@ -86,6 +88,10 @@ void	move_player(t_game *game, t_player *player)
 		rotate_right(game);
 }
 
+/***
+ * Currently not in use yet
+ * @note I have changed the method to using vectors to store direction, no more angles :D
+ */
 bool init_player_position(t_game *game)
 {
     const char player_chars[] = "NSEW";
