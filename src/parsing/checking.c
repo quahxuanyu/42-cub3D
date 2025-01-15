@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/01 17:23:26 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/15 13:05:31 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int check_input(int ac, char **av)
 }
 
 // Open file to check every line
-// Then start parsing at [split_file_into_two_parts]
 char **duplicate_file(const char *file)
 {
     int fd;
@@ -121,7 +120,7 @@ char **duplicate_file(const char *file)
 // }
 
 // Main function to check file
-int go_to_check_file(t_game *game, int ac, char **av)
+int check_file_format(t_game *game, int ac, char **av)
 {
     char **temp_map;
 

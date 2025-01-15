@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 14:35:54 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/15 14:12:36 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int main(int ac, char **av)
     printf("Debug: File checked successfully\n");
 // map_checking(&game, temp_map);
     init_all(&game, av[1], av[2]);
+    printf("Debug: Game initialized successfully\n");
+
     setup_hooks(&game);
 // Start the rendering loop
     mlx_loop(game.mlx);

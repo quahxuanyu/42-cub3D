@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/12 15:15:57 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/15 13:35:52 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void init_all(t_game *game, char *map_file, char *texture_file)
     init_player(&game->player); // Step 1: Initialize player position and direction
     init_mlx(game); // Step 2: Initialize MLX
     init_texture(game); // Step 3: Initialize texutures and colors of ceiling (Temporary hardcode texutures)
+    
+    
     game->map_data.map = get_map(map_file); // Step 4: Load and validate the map
     if (!game->map)
     {

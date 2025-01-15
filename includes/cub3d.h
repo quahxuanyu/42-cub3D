@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 14:32:41 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/15 13:43:26 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ typedef	struct s_img
 typedef struct s_map_data
 {
 	t_img	*wall_tex; //array of 4 for the wall textures
-    size_t   c_rgb;
-    size_t   f_rgb;
+	size_t	c_rgb;
+	size_t	f_rgb;
     char    **map;
     int     width;
     int     height;
@@ -188,34 +188,47 @@ void	get_vertical_texture(t_game *game);
 void	free_all(t_game *game);
 
 /* Parsing */
-void	check_first_and_last_line(t_game *game, char **temp_map);
-void    check_first_and_last_char(t_game *game);
-char	*trim_from_back(int len, char *temp_map);
-char	**map_trim_spaces_newline_from_the_back(char **temp_map);
-void	map_checking(t_game *game, char **temp_map);
-void    check_only_one_player(t_game *game);
-char    **get_map_trim_newline(t_game *game, char **temp_map);
-void	check_empty_lines(char **temp_map);
-void    pad_map_with_spaces(t_game *game, char **temp_map);
-void	check_middle_map_line(t_game *game);
-int		check_correct_order(char *str, int check);
-int		get_first_line(char **temp_map, int first_line);
-int		get_last_line(char **temp_map, int last_line);
-void    check_invalid_character(t_game *game);
-void    set_player_angle(t_game *game, char direction);
-void    malloc_map(t_game *game);
+// void	check_first_and_last_line(t_game *game, char **temp_map);
+// void    check_first_and_last_char(t_game *game);
+// char	*trim_from_back(int len, char *temp_map);
+// char	**map_trim_spaces_newline_from_the_back(char **temp_map);
+// void	map_checking(t_game *game, char **temp_map);
+// void    check_only_one_player(t_game *game);
+// char    **get_map_trim_newline(t_game *game, char **temp_map);
+// void	check_empty_lines(char **temp_map);
+// void    pad_map_with_spaces(t_game *game, char **temp_map);
+// void	check_middle_map_line(t_game *game);
+// int		check_correct_order(char *str, int check);
+// int		get_first_line(char **temp_map, int first_line);
+// int		get_last_line(char **temp_map, int last_line);
+// void    check_invalid_character(t_game *game);
+// void    set_player_angle(t_game *game, char direction);
+// void    malloc_map(t_game *game);
 
 
-int		check_input(int ac, char **av);
-void	check_for_ones(char *str, int i);
-void	check_extra_character(char **split);
+// int		check_input(int ac, char **av);
+// void	check_for_ones(char *str, int i);
+// void	check_extra_character(char **split);
 
-char	**duplicate_file(const char *file);
-int		validate_textures(t_game *game);
-int		go_to_check_file(t_game *game, int ac, char **av);
-void	print_err_msg(char *msg);
-int		ft_count_lines(int fd);
-void	ft_freesplit(char **split);
+// char	**duplicate_file(const char *file);
+// int		validate_textures(t_game *game);
+// int		go_to_check_file(t_game *game, int ac, char **av);
+// void	print_err_msg(char *msg);
+// int		ft_count_lines(int fd);
+// void	ft_freesplit(char **split);
+
+// int check_texture_format(t_game *game);
+
+/*Validate*/
+int check_input(int ac, char **av);
+char **duplicate_file(const char *file);
+bool has_direction(char **map, int map_height);
+void check_map_validity(char **file_lines, int line_count);
+int go_to_check_file(t_game *game, int ac, char **av);
+
+
+
+
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);
