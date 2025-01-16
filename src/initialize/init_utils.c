@@ -6,47 +6,11 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 17:24:08 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 23:38:07 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-// char    **get_map(const char *file)
-// {
-//     char    **map;
-//     int     fd;
-//     char    *line;
-//     size_t  i;
-
-//     fd = open(file , O_RDONLY);
-//     if (fd == -1)
-//     {
-//         perror("Error opening map file");
-//         return NULL;
-//     }
-//     map = malloc(sizeof(char *) * 11); // Allocate space for 11 rows + 1 for NULL termination
-//     if (!map)
-//     {
-//         perror("Error allocating memory for map");
-//         close(fd);
-//         return NULL;
-//     }
-//     i = 0;
-//     while (i < 10 && (line = get_next_line(fd)) != NULL)
-//     {
-//          if (!line)
-//         {
-//             printf("Error: get_next_line returned NULL\n");
-//             break;
-//         }
-//         map[i] = line;
-//         i++;
-//     }
-//     map[i] = NULL; // Null terminate the map
-//     close(fd);
-//     return map;
-// }
 
 /***
  * @brief Initialize player's position and direction
@@ -157,17 +121,6 @@ int load_texture(t_game *game, t_img *tex, char *path)
  * @note Changed from individual variables to array of t_img for wall textures (wall_tex[])
  * @note Ceiling and Floor colors changed from RGB struct to size_t
  */
-// void init_texture(t_game *game)
-// {
-//     game->map_data.wall_tex = (t_img *)malloc(sizeof(t_img) * 4); //remember to FREE
-//     load_texture(game, &game->map_data.wall_tex[NORTH], "textures/wood.xpm");
-//     load_texture(game, &game->map_data.wall_tex[SOUTH], "textures/redbrick.xpm");
-//     load_texture(game, &game->map_data.wall_tex[EAST], "textures/purplestone.xpm");
-//     load_texture(game, &game->map_data.wall_tex[WEST], "textures/mossy.xpm");
-//     game->map_data.c_rgb = 0x0000FF; //Temp Color - changed from RBG struct to just size_t
-//     game->map_data.f_rgb = 0xFFFFFF; //Temp Color - changed from RBG struct to just size_t
-// }
-
 int init_texture(t_game *game)
 {
     if (!game)

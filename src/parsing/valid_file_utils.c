@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 05:59:45 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/16 23:22:10 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 23:56:56 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,24 +126,4 @@ void free_partial_temp(t_game *game, int current_row)
         i++;
     }
     free(game->temp_map);
-}
-
-/*
-* Frees all memory allocated for final map data
-* Handles NULL checks and complete cleanup of map structure
-*/
-void free_map_data(t_game *game)
-{
-    int i;
-
-    if (!game || !game->map_data.map)
-        return;
-    i = 0;
-    while (i < game->map_data.height)
-    {
-        free(game->map_data.map[i]);
-        i++;
-    }
-    free(game->map_data.map);
-    game->map_data.map = NULL;
 }

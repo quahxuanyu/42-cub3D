@@ -35,8 +35,11 @@ SRC_FILES = main.c \
 			$(PARDIR)valid_file_utils.c\
 			$(PARDIR)valid_file_mem.c\
 			$(PARDIR)valid_texture.c\
-			$(PARDIR)map_check.c\
+			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
+			$(PARDIR)map_check.c\
+			$(PARDIR)map_utils.c\
+			$(PARDIR)map_wall.c\
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))

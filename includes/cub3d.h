@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 22:29:33 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/17 00:15:22 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,84 +195,68 @@ void	get_vertical_texture(t_game *game);
 
 //utils.c
 void	free_all(t_game *game);
+void	print_err_msg(char *msg);
 
 /* Parsing */
-// void	check_first_and_last_line(t_game *game, char **temp_map);
-// void    check_first_and_last_char(t_game *game);
-// char	*trim_from_back(int len, char *temp_map);
-// char	**map_trim_spaces_newline_from_the_back(char **temp_map);
-// void	map_checking(t_game *game, char **temp_map);
-// void    check_only_one_player(t_game *game);
-// char    **get_map_trim_newline(t_game *game, char **temp_map);
-// void	check_empty_lines(char **temp_map);
-// void    pad_map_with_spaces(t_game *game, char **temp_map);
-// void	check_middle_map_line(t_game *game);
-// int		check_correct_order(char *str, int check);
-// int		get_first_line(char **temp_map, int first_line);
-// int		get_last_line(char **temp_map, int last_line);
-// void    check_invalid_character(t_game *game);
-// void    set_player_angle(t_game *game, char direction);
-// void    malloc_map(t_game *game);
+//main_map_check.c
+int	map_checking(t_game *game);
+int	validate_map_walls(t_game *game);
+int	validate_player_start(t_game *game);
+int	validate_map_chars(t_game *game);
 
+//map_check.c
+int	check_first_last_row(char **map, int height);
+int	check_row_edges(char **map, int row, int height);
+int	check_config_identifier(char *line, int i);
+int	count_players(t_game *game, int map_start);
+void	set_player_position(t_game *game, int i, int j, int map_start);
 
-// int		check_input(int ac, char **av);
-// void	check_for_ones(char *str, int i);
-// void	check_extra_character(char **split);
+//map_check_utils.c
+char **copy_map(char **original_map, int height);
+void free_map(char **map);
+void print_err_msg(char *msg);
+int	is_valid_map_char(char c);
+int	is_player_char(char c);
 
-// char	**duplicate_file(const char *file);
-// int		validate_textures(t_game *game);
-// int		go_to_check_file(t_game *game, int ac, char **av);
-void	print_err_msg(char *msg);
-// int		ft_count_lines(int fd);
-// void	ft_freesplit(char **split);
+//map_utils.c
+void free_map_data(t_game *game);
+int	is_map_line(char *line);
+int	find_map_start(char **map, int height);
 
-// int check_texture_format(t_game *game);
+//map_wall.c
+int	check_surrounding_walls(char **map, int row, int col);
+int	is_surrounded_by_walls(char **map, int row, int col, int height);
+int	is_position_valid(char **map, int row, int col, int height);
+void	convert_spaces_to_walls(t_game *game);
+int	check_map_chars_row(char **map, int row);
 
 /*Validate*/
+//valid_file.c
 int go_to_check_file(char *file_path, t_game *game);
-int valid_map(t_game *game);
 int valid_texture(t_game *game, char *file_path);
 int valid_file(char *file_path, t_game *game);
 bool valid_input(int ac, char *filepath);
 
-int get_temp_file_size(char *file_path, t_game *game);
-int create_temp_map(char *file_path, t_game *game);
-int parse_temp_map(t_game *game);
-void free_temp_map(t_game *game);
-void free_partial_temp(t_game *game, int current_row);
-
-int get_map_dimensions(t_game *game);
-int allocate_final_map(t_game *game);
-int copy_map_from_temp(t_game *game);
-void free_map_data(t_game *game);
-void free_partial_map(t_game *game, int current_row);
-
+//valid_texture.c
 int validate_xpm_format(char *path);
-//int load_texture(char *path, t_img *tex, void *mlx);
 int process_direction(char *line, t_game *game, int direction);
 int parse_directions(t_game *game, char *file_path);
 int validate_rgb(size_t color);
 int check_rgb_colors(t_map_data *map_data);
 int validate_loaded_textures(t_game *game);
 
+//valid_file_mem.c
+int get_map_dimensions(t_game *game);
+int allocate_final_map(t_game *game);
+int copy_map_from_temp(t_game *game);
+void free_partial_map(t_game *game, int current_row);
 
-int map_checking(t_game *game);
-int validate_map_walls(t_game *game);
-int flood_fill_check(char **map, int height);
-int is_position_valid(char **map, int row, int col, int height);
-int validate_player_start(t_game *game);
-int is_player_char(char c);
-void convert_spaces_to_walls(t_game *game);
-int validate_map_chars(t_game *game);
-int is_valid_map_char(char c);
-// int is_map_valid_size(t_game *game);
-int find_map_start(char **map, int height);
-int is_map_line(char *line);
-int is_row_valid(char *row);
-int is_surrounded_by_walls(char **map, int row, int col, int height);
-
-char **copy_map(char **original_map, int height);
-void free_map(char **map);
+//valid_file_utils.c
+int get_temp_file_size(char *file_path, t_game *game);
+int create_temp_map(char *file_path, t_game *game);
+int parse_temp_map(t_game *game);
+void free_temp_map(t_game *game);
+void free_partial_temp(t_game *game, int current_row);
 
 
 //main.c
