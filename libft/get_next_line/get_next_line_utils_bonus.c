@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
+/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:52 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 22:31:21 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/15 14:05:09 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,31 @@ char	*ft_strjoin_special(char const *s1, char const *s2, int bytes_read)
 	return (str);
 }
 
-char	*ft_strchr_gnl(const char *s, int c)
+char *ft_strchr_gnl(const char *s, int c)
 {
-	char	*temp;
-	int		len;
-	int		i;
+    char *temp;
+    size_t i;
 
-	len = BUFFER_SIZE;
-	temp = (char *)s;
-	i = -1;
-	while (++i <= len)
-		if (temp[i] == (char)c)
-			return (&temp[i]);
-	return (NULL);
+    // Check for null pointer
+    if (!s)
+        return (NULL);
+
+    temp = (char *)s;
+    i = 0;
+
+    // Continue until we find the character or reach the end of string
+    while (temp[i] != '\0')
+    {
+        if (temp[i] == (char)c)
+            return (&temp[i]);
+        i++;
+    }
+
+    // Check one more time for null terminator if that's what we're looking for
+    if ((char)c == '\0')
+        return (&temp[i]);
+
+    return (NULL);
 }
 
 char	*ft_strdup_gnl(const char *s1)

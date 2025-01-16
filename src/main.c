@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 14:35:54 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/16 21:25:20 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,18 @@ void setup_hooks(t_game *game)
 int main(int ac, char **av)
 {
     t_game game;
-    char **temp_map;
-// Check the input and the file
-    if (go_to_check_file(&game, ac, av) == false)
-        return (1);
-    printf("Debug: File checked successfully\n");
-// map_checking(&game, temp_map);
+    
     init_all(&game, av[1], av[2]);
+    if (go_to_check_file(av[1], &game) == FAILURE)
+    {
+        return (1);
+    }
+    printf("Debug: File checked successfully\n");
+    map_checking(&game);
+    
     setup_hooks(&game);
-// Start the rendering loop
+    printf("Debug: Setup hooks\n");
     mlx_loop(game.mlx);
+    printf("Debug: MLX loop\n");
     return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:33:48 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 13:42:24 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:31:19 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,14 @@ void    set_ceiling_floor(t_game *game)
  */
 void	raycast(t_game *game)
 {
+
+     // Add these debug checks at the start
+    if (!game->map_data.map) {
+        printf("Error: map is NULL\n");
+        return;
+    }
+    printf("Debug: Map dimensions: %d x %d\n", game->map_data.width, game->map_data.height);
+    
     int x;
     
     x = -1;

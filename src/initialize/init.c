@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 15:55:12 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/12 15:15:57 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:00:42 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,29 @@
 */
 void init_all(t_game *game, char *map_file, char *texture_file)
 {
-    init_player(&game->player); // Step 1: Initialize player position and direction
-    init_mlx(game); // Step 2: Initialize MLX
-    init_texture(game); // Step 3: Initialize texutures and colors of ceiling (Temporary hardcode texutures)
-    game->map_data.map = get_map(map_file); // Step 4: Load and validate the map
-    if (!game->map)
-    {
-        printf("Error: Failed to load map\n");
-        exit(EXIT_FAILURE);
-    }    
+    printf("Debug: Initializing game\n");
+    memset(game, 0, sizeof(t_game));  // Initialize all to 0 first
+    printf("Debug: Game structure initialized to zero\n");
 
-    //Debug
-    printf("Player position: x=%f, y=%f, angle=%f\n", 
-           game->player.pos_x, game->player.pos_y, game->player.angle);
-    printf("Map loaded successfully.\n");
+    init_player(&game->player);
+    printf("Debug: Player initialized\n");
+
+    init_mlx(game);
+    printf("Debug: MLX initialized\n");
+
+    init_texture(game);
+    printf("Debug: Textures initialized\n");
+    
+    // Initialize map_data
+    game->map_data.map = NULL;
+    game->map_data.width = 0;
+    game->map_data.height = 0;
+    printf("Debug: Map data initialized\n");
+    
+    // if (!game->map_data.map && map_file)  // Only try to load if we have a file
+    // {
+    //     printf("Error: Map not properly initialized\n");
+    //     exit(EXIT_FAILURE);
+    // }    
+    printf("Debug: Initialization complete\n");
 }
