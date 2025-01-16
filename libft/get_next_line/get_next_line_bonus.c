@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 14:09:46 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/01 22:31:47 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 12:33:11 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,33 @@ char *get_next_line(int fd)
 
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
     {
-        printf("Error: Invalid file descriptor or buffer size\n");
         return (NULL);
     }
 
     buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
     if (!buffer)
     {
-        printf("Error: Failed to allocate buffer\n");
         return (NULL);
     }
 
     fill_buffer(fd, buffer, &left_over[fd]);
     free(buffer);
 
+    if (!left_over[fd] || left_over[fd][0] == '\0')
+    {
+        free(left_over[fd]);
+        left_over[fd] = NULL;
+        return (NULL);
+    }
+
     line = set_line(&left_over[fd]);
     if (!line)
     {
-        printf("Error: Failed to set line\n");
-        free(left_over[fd]);
-        free(line);
+        if (left_over[fd])
+        {
+            free(left_over[fd]);
+            left_over[fd] = NULL;
+        }
         return (NULL);
     }
 

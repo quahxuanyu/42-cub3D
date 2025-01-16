@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hheng <hheng@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/15 13:43:26 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:10:35 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <../libft/libft.h>
 #include <math.h>
 #include <stdio.h> 
+#include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <fcntl.h>
@@ -36,6 +37,12 @@
 
 #define VERTICAL 0
 #define HORIZONTAL 1
+
+#define FAILURE 0
+#define SUCCESS 1
+
+#define FALSE 0
+#define TRUE 1
 
 # define W 119
 # define A 97
@@ -138,6 +145,8 @@ typedef struct s_game
 	t_ray		ray;
 	t_map_data  map_data;
 	char		**map;
+	 int temp_rows;
+	char **temp_map;
 }	t_game;
 
 void			init_player(t_player *player);
@@ -153,9 +162,9 @@ bool 	init_player_position(t_game *game);
 void			init_game(t_game *game, char *map_file);
 char 			**get_map(const char *file);
 void 			init_mlx(t_game *game);
-
+int 			load_texture(t_game *game, t_img *tex, char *path);
 //init_2.c
-void init_texture(t_game *game);
+int init_texture(t_game *game);
 
 //utils.c
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
@@ -213,22 +222,38 @@ void	free_all(t_game *game);
 // char	**duplicate_file(const char *file);
 // int		validate_textures(t_game *game);
 // int		go_to_check_file(t_game *game, int ac, char **av);
-// void	print_err_msg(char *msg);
+void	print_err_msg(char *msg);
 // int		ft_count_lines(int fd);
 // void	ft_freesplit(char **split);
 
 // int check_texture_format(t_game *game);
 
 /*Validate*/
-int check_input(int ac, char **av);
-char **duplicate_file(const char *file);
-bool has_direction(char **map, int map_height);
-void check_map_validity(char **file_lines, int line_count);
-int go_to_check_file(t_game *game, int ac, char **av);
+int go_to_check_file(char *file_path, t_game *game);
+int valid_map(t_game *game);
+int valid_texture(t_game *game, char *file_path);
+int valid_file(char *file_path, t_game *game);
+bool valid_input(int ac, char *filepath);
 
+int get_temp_file_size(char *file_path, t_game *game);
+int create_temp_map(char *file_path, t_game *game);
+int parse_temp_map(t_game *game);
+void free_temp_map(t_game *game);
+void free_partial_temp(t_game *game, int current_row);
 
+int get_map_dimensions(t_game *game);
+int allocate_final_map(t_game *game);
+int copy_map_from_temp(t_game *game);
+void free_map_data(t_game *game);
+void free_partial_map(t_game *game, int current_row);
 
-
+int validate_xpm_format(char *path);
+//int load_texture(char *path, t_img *tex, void *mlx);
+int process_direction(char *line, t_game *game, int direction);
+int parse_directions(t_game *game, char *file_path);
+int validate_rgb(size_t color);
+int check_rgb_colors(t_map_data *map_data);
+int validate_loaded_textures(t_game *game);
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);

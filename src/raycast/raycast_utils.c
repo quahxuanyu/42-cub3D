@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:44:43 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 13:42:57 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:30:48 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ void    dda_algo(t_game *game, t_player *player, t_ray *ray)
             ray->map_y += ray->map_step_y;
             ray->side = 1;
         }
+
+          // Check map boundaries first
+        if (ray->map_x < 0 || ray->map_x >= game->map_data.width ||
+            ray->map_y < 0 || ray->map_y >= game->map_data.height)
+        {
+            hit = 1;  // Hit boundary
+            break;
+        }
+        
         // Check if ray has hit a wall
         if (game->map_data.map[ray->map_y][ray->map_x] == '1')
             hit = 1;

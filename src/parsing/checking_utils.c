@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 17:56:31 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/01 21:52:35 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 06:11:51 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void print_err_msg(char *msg)
 {
-	ft_printf("Error\n");
+	// ft_printf("Error\n");
 	ft_printf(msg);
 	ft_printf("\n");
 	exit(EXIT_FAILURE);
