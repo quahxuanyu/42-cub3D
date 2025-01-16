@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 17:29:10 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 21:25:20 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int ac, char **av)
         return (1);
     }
     printf("Debug: File checked successfully\n");
-  
+    map_checking(&game);
     
     setup_hooks(&game);
     printf("Debug: Setup hooks\n");

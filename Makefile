@@ -14,7 +14,6 @@ OBJDIR = objs/
 MAPDIR = maps/
 
 # sub directory
-PARDIR = $(SRCDIR)parsing/
 INITDIR = $(SRCDIR)initialize/
 RAYCASTDIR = $(SRCDIR)raycast/
 PLAYERDIR = $(SRCDIR)player/
@@ -25,13 +24,6 @@ VALDIR = $(SRCDIR)validate/
 SRC_FILES = main.c \
             $(INITDIR)init.c \
             $(INITDIR)init_utils.c \
-            $(PARDIR)check_map_element.c \
-			$(PARDIR)check_map_element2.c \
-			$(PARDIR)check_map_utils.c \
-            $(PARDIR)checking_utils.c \
-            $(PARDIR)check_map.c \
-			$(PARDIR)parse_player.c \
-			$(PARDIR)parse_store_map.c \
             $(PLAYERDIR)player.c \
             $(PLAYERDIR)rotate.c \
 			$(PLAYERDIR)movement.c \
@@ -43,6 +35,8 @@ SRC_FILES = main.c \
 			$(VALDIR)valid_file_utils.c\
 			$(VALDIR)valid_file_mem.c\
 			$(VALDIR)valid_texture.c\
+			$(VALDIR)map_check.c\
+			$(VALDIR)map_check_utils.c\
 
 SRCS = $(addprefix $(SRCDIR), $(SRC_FILES))
 OBJS = $(addprefix $(OBJDIR), $(notdir $(SRCS:.c=.o)))
@@ -61,7 +55,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # Include directories
-INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH) -I $(PARDIR) -I $(INITDIR) -I $(PLAYERDIR) -I $(RAYCASTDIR) -I $(MAPDIR) -I $(UTILSDIR) -I $(VALDIR) 
+INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH)  -I $(INITDIR) -I $(PLAYERDIR) -I $(RAYCASTDIR) -I $(MAPDIR) -I $(UTILSDIR) -I $(VALDIR) 
 
 # Linker flags
 LDFLAGS = -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft -lm -lbsd -lX11 -lXext
@@ -79,10 +73,6 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 	@mkdir -p $(OBJDIR)raycast
 	@mkdir -p $(OBJDIR)player
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(OBJDIR)%.o: $(PARDIR)%.c
-	@mkdir -p $(OBJDIR)
-	$(CC) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(INITDIR)%.c
 	@mkdir -p $(OBJDIR)

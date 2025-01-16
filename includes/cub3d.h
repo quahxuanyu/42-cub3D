@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 17:10:35 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/16 22:29:33 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,26 @@ int parse_directions(t_game *game, char *file_path);
 int validate_rgb(size_t color);
 int check_rgb_colors(t_map_data *map_data);
 int validate_loaded_textures(t_game *game);
+
+
+int map_checking(t_game *game);
+int validate_map_walls(t_game *game);
+int flood_fill_check(char **map, int height);
+int is_position_valid(char **map, int row, int col, int height);
+int validate_player_start(t_game *game);
+int is_player_char(char c);
+void convert_spaces_to_walls(t_game *game);
+int validate_map_chars(t_game *game);
+int is_valid_map_char(char c);
+// int is_map_valid_size(t_game *game);
+int find_map_start(char **map, int height);
+int is_map_line(char *line);
+int is_row_valid(char *row);
+int is_surrounded_by_walls(char **map, int row, int col, int height);
+
+char **copy_map(char **original_map, int height);
+void free_map(char **map);
+
 
 //main.c
 void 	init_all(t_game *game, char *map_file, char *texture_file);
