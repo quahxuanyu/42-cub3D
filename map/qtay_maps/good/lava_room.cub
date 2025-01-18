@@ -1,10 +1,7 @@
-NO textures/purplestone.xpm
-
-SO textures/greystone.xpm
-
-WE textures/mossy.xpm
-
-EA textures/pillar.xpm
+NO textures/lava.xpm
+SO textures/lava.xpm
+WE textures/lava.xpm
+EA textures/lava.xpm
 
 F 126,42,28
 C 255,106,19

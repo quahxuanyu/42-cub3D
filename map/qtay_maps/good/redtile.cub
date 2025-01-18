@@ -1,7 +1,7 @@
-NO textures/simonkraft/netherrack_01.xpm
-EA textures/simonkraft/netherrack.xpm
-SO textures/simonkraft/netherrack_02.xpm
-WE textures/simonkraft/netherrack.xpm
+NO textures/netherrack_01.xpm
+EA textures/netherrack.xpm
+SO textures/netherrack_02.xpm
+WE textures/netherrack.xpm
 
 F 88,17,26
 C 224,17,95

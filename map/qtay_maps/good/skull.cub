@@ -1,7 +1,7 @@
-NO textures/simonkraft/MARBFAC2.xpm
-WE textures/simonkraft/SKULWALL.xpm
-SO textures/simonkraft/MARBFACE.xpm
-EA textures/simonkraft/SKULWAL3.xpm
+NO textures/MARBFAC2.xpm
+WE textures/SKULWALL.xpm
+SO textures/MARBFACE.xpm
+EA textures/SKULWAL3.xpm
 
 F 0,32,0
 C 120,0,16

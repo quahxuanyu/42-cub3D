@@ -1,8 +1,8 @@
 
-NO textures/simonkraft/wall_3.xpm
-SO textures/simonkraft/wall_3.xpm
-WE textures/simonkraft/wood.xpm
-EA textures/simonkraft/wood.xpm
+NO textures/wall_3.xpm
+SO textures/wall_3.xpm
+WE textures/wood.xpm
+EA textures/wood.xpm
 
 F 58,58,58
 C 44,62,80

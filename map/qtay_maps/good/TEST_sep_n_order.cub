@@ -1,11 +1,11 @@
-NO textures/simonkraft/wet_sponge.xpm
-SO        textures/simonkraft/wet_sponge.xpm
+NO textures/wet_sponge.xpm
+SO        textures/wet_sponge.xpm
 
 C      225    ,     30,0
 
-WE textures/simonkraft/wet_sponge.xpm
+WE textures/wet_sponge.xpm
 
-EA textures/simonkraft/wet_sponge.xpm
+EA textures/wet_sponge.xpm
 
 
 

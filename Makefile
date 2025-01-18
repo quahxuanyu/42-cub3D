@@ -19,6 +19,7 @@ RAYCASTDIR = $(SRCDIR)raycast/
 PLAYERDIR = $(SRCDIR)player/
 UTILSDIR = $(SRCDIR)utils/
 PARDIR = $(SRCDIR)parsing/
+VALDIR = $(SRCDIR)validate/
 
 # Source files
 SRC_FILES = main.c \
@@ -31,10 +32,10 @@ SRC_FILES = main.c \
             $(RAYCASTDIR)raycast_utils.c \
 			$(RAYCASTDIR)texture.c \
 			$(UTILSDIR)utils.c \
-			$(PARDIR)valid_file.c\
-			$(PARDIR)valid_file_utils.c\
-			$(PARDIR)valid_file_mem.c\
-			$(PARDIR)valid_texture.c\
+			$(VALDIR)valid_file.c\
+			$(VALDIR)valid_file_utils.c\
+			$(VALDIR)valid_file_mem.c\
+			$(VALDIR)valid_texture.c\
 			$(PARDIR)main_map_check.c\
 			$(PARDIR)map_check_utils.c\
 			$(PARDIR)map_check.c\
@@ -58,7 +59,7 @@ LIBFT_PATH = ./libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
 # Include directories
-INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH)  -I $(INITDIR) -I $(PLAYERDIR) -I $(RAYCASTDIR) -I $(MAPDIR) -I $(UTILSDIR) -I $(PARDIR) 
+INCLUDES = -I includes/ -I $(MLX_PATH) -I $(LIBFT_PATH)  -I $(INITDIR) -I $(PLAYERDIR) -I $(RAYCASTDIR) -I $(MAPDIR) -I $(UTILSDIR) -I $(PARDIR) -I $(VALDIR)
 
 # Linker flags
 LDFLAGS = -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft -lm -lbsd -lX11 -lXext
@@ -94,6 +95,10 @@ $(OBJDIR)%.o: $(RAYCASTDIR)%.c
 	$(CC) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR)%.o: $(PARDIR)%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(INCLUDES) -c $< -o $@
+
+$(OBJDIR)%.o: $(VALDIR)%.c
 	@mkdir -p $(OBJDIR)
 	$(CC) $(INCLUDES) -c $< -o $@
 

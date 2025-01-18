@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/17 00:15:22 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/18 10:09:40 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 #define WALL_SIZE 63
 #define TEXTURE_SIZE 64
 
-#define MOVE_SPEED 0.1
+#define MOVE_SPEED 0.05
 #define ROTATE_SPEED 0.01
 
 #define VERTICAL 0

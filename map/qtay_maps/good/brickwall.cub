@@ -1,10 +1,10 @@
-NO textures/purplestone.xpm
+NO textures/Red10.xpm
 
-SO textures/greystone.xpm
+SO textures/brown.xpm
 
-WE textures/mossy.xpm
+WE textures/Red10.xpm
 
-EA textures/pillar.xpm
+EA textures/brown.xpm
 
 F 187,210,225
 
