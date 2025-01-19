@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xquah <xquah@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/12 14:37:13 by xquah            ###   ########.fr       */
+/*   Updated: 2025/01/19 13:46:20 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ int key_press(int keycode, t_game *game)
 		game->player.left_rotate = true;
 	if (keycode == RIGHT)
 		game->player.right_rotate = true;
+	if (keycode == M)
+{
+    game->player.mouse = !game->player.mouse;
+    if (game->player.mouse)
+    {
+        mlx_mouse_show(game->mlx, game->win);
+        game->player.left_rotate = false;
+        game->player.right_rotate = false;
+    }
+    else
+    {
+        mlx_mouse_hide(game->mlx, game->win);
+        mlx_mouse_move(game->mlx, game->win, screenWidth / 2, screenHeight / 2);
+    }
+}
 	if (keycode == ESC)
 	{
 		free_all(game); // change to free_and_exit() later

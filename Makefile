@@ -27,6 +27,8 @@ SRC_FILES = main.c \
             $(INITDIR)init_utils.c \
             $(PLAYERDIR)player.c \
             $(PLAYERDIR)rotate.c \
+			$(PLAYERDIR)mouse.c \
+			$(PLAYERDIR)torch.c \
 			$(PLAYERDIR)movement.c \
             $(RAYCASTDIR)raycast.c \
             $(RAYCASTDIR)raycast_utils.c \

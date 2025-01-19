@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/16 21:25:20 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 15:01:08 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int draw_loop(t_game *game)
     clear_image(game);
     set_ceiling_floor(game);
     raycast(game);
+    draw_torch(game);
     mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
     return (0);
 }
@@ -26,6 +27,7 @@ void setup_hooks(t_game *game)
 {
     mlx_hook(game->win, 2, 1L << 0, key_press, game);
     mlx_hook(game->win, 3, 1L << 1, key_release, &game->player);
+    mlx_hook(game->win, 6, 1L << 6, mouse_pov, game);
     mlx_loop_hook(game->mlx, draw_loop, game);
 }
 
