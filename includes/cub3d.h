@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/19 13:51:07 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 14:13:16 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ bool 	init_player_position(t_game *game);
 
 
 //mouse.c
-int mouse_motion_handler(int x, int y, t_game *game);
+int mouse_pov(int x, int y, t_game *game);
 
 //init.c
 void			init_game(t_game *game, char *map_file);

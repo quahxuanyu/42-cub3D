@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 20:32:28 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/19 13:40:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 14:13:47 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void setup_hooks(t_game *game)
 {
     mlx_hook(game->win, 2, 1L << 0, key_press, game);
     mlx_hook(game->win, 3, 1L << 1, key_release, &game->player);
-    mlx_hook(game->win, 6, 1L << 6, mouse_motion_handler, game);
+    mlx_hook(game->win, 6, 1L << 6, mouse_pov, game);
     mlx_loop_hook(game->mlx, draw_loop, game);
 }
 

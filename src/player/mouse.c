@@ -6,13 +6,13 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 13:40:59 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/19 13:48:07 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 14:13:01 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int mouse_motion_handler(int x, int y, t_game *game)
+int mouse_pov(int x, int y, t_game *game)
 {
     static int old_x;
     int diff_x;
