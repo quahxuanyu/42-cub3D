@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 22:31:14 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/18 10:56:09 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 13:44:58 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void    init_player(t_player *player)
     player->key_right = false;
     player->left_rotate = false;
     player->right_rotate = false;
+    player->mouse = false;
 }
 
 /**

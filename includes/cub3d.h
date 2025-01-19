@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 13:17:37 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/18 10:09:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 13:51:07 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <X11/X.h>
+#include <X11/X.h> //for mouse events
 #define mapWidth 18
 #define mapHeight 10
 // RATIO: 4:3
@@ -48,6 +48,7 @@
 # define A 97
 # define S 115
 # define D 100
+# define M 109
 # define LEFT 65361
 # define RIGHT 65363
 # define ESC 65307
@@ -110,6 +111,7 @@ typedef struct s_player
 	bool	key_right;
 	bool	left_rotate;
 	bool	right_rotate;
+	bool 	mouse;
 	float	angle;
 }	t_player;
 
@@ -157,6 +159,10 @@ bool			touch(t_game *game, float px, float py);
 
 //player.c
 bool 	init_player_position(t_game *game);
+
+
+//mouse.c
+int mouse_motion_handler(int x, int y, t_game *game);
 
 //init.c
 void			init_game(t_game *game, char *map_file);
