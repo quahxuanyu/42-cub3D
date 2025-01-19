@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/19 14:58:13 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/19 16:14:06 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/19 16:16:53 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void draw_torch(t_game *game)
     int x, y;
     int screen_x, screen_y;
     int color;
-    float scale = 5.5;  // Increased scale from 2.0 to 3.5
+    float scale = 5.5; 
     
     // Update torch bobbing (adjusted for larger scale)
     game->torch.bob_offset += 0.08 * game->torch.bob_direction;
