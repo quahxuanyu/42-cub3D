@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:48:45 by xquah             #+#    #+#             */
-/*   Updated: 2025/01/19 13:46:20 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/20 15:06:40 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int key_press(int keycode, t_game *game)
 {
+	printf("Key pressed: %d\n", keycode); // Debug message
 	if (keycode == W)
 		game->player.key_up = true;
 	if (keycode == S)
