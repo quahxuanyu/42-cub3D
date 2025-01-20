@@ -1,7 +1,7 @@
-NO textures/simonkraft/north_texture.xpm
-WE textures/simonkraft/south_texture.xpm
-EA textures/simonkraft/east_texture.xpm
-SO textures/simonkraft/west_texture.xpm
+NO textures/north_texture.xpm
+WE textures/south_texture.xpm
+EA textures/east_texture.xpm
+SO textures/west_texture.xpm
 
 C 122, 122, 90
 F 175, 159, 95

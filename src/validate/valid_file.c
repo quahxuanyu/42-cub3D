@@ -6,7 +6,7 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/18 10:12:01 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/20 12:09:40 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ bool valid_input(int ac, char *filepath)
 
 int valid_file(char *file_path, t_game *game)
 {
-    if (!file_path || !game)
-        return (FAILURE);
     if (get_temp_file_size(file_path, game) == FAILURE)
         return (FAILURE);
     if (create_temp_map(file_path, game) == FAILURE)
@@ -51,22 +49,12 @@ int valid_file(char *file_path, t_game *game)
 
 int valid_texture(t_game *game, char *file_path)
 {
-    printf("Debug: Validating texture\n");
     if (!game || !game->mlx || !file_path)
-    {
-        printf("Error: Invalid parameters\n");
         return (FALSE);
-    }
     if (!game->map_data.wall_tex)
-    {
-        printf("Error: Texture array not allocated\n");
         return (FALSE);
-    }
     if (!parse_directions(game, file_path))
-    {
-        printf("Error: Failed to parse textures\n");
         return (FALSE);
-    }
     if (!validate_loaded_textures(game))
         return (FALSE);
     if (!check_rgb_colors(&game->map_data))
@@ -77,7 +65,7 @@ int valid_texture(t_game *game, char *file_path)
 int go_to_check_file(char *file_path, t_game *game)
 {
     if (!file_path || !game)
-        return (print_err_msg("NULL pointer provided"), FAILURE);
+        return (print_err_msg("Invalid argument"), FAILURE);
         
     if (!valid_input(2, file_path))
         return (print_err_msg("Invalid input"), FAILURE);
