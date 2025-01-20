@@ -6,12 +6,13 @@
 /*   By: hheng < hheng@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:38:20 by hheng             #+#    #+#             */
-/*   Updated: 2025/01/20 12:09:40 by hheng            ###   ########.fr       */
+/*   Updated: 2025/01/20 13:46:08 by hheng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+bool valid_input(int ac, char *filepath)
 bool valid_input(int ac, char *filepath)
 {
     if (ac != 2)
@@ -19,13 +20,13 @@ bool valid_input(int ac, char *filepath)
         printf("Error: Invalid number of arguments!\n");
         return false;
     }
-    
-    char *ext = strrchr(filepath, '.');
-    if (!ext || ft_strcmp(ext, ".cub") != 0)
+
+    if (ft_strcmp(filepath + strlen(filepath) - 4, ".cub") != 0)
     {
         printf("Error: Invalid file extension! Expected .cub file.\n");
         return false;
     }
+
     printf("Debug: Input is valid\n");
     return true;
 }
